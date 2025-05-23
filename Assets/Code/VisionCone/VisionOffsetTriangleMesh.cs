@@ -86,9 +86,9 @@ namespace Code.VisionCone
             base.CacheParams();
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-#if UNITY_EDITOR
             Vector3 origin = transform.position + transform.rotation * _centerOffset;
 
             for (int i = 0; i <= _segments; i++)
@@ -111,7 +111,7 @@ namespace Code.VisionCone
                     Gizmos.DrawLine(origin, origin + dir * maxDist);
                 }
             }
-#endif
         }
+#endif
     }
 }

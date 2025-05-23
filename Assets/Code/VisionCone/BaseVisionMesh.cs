@@ -8,24 +8,22 @@ namespace Code.VisionCone
     {
         [Header("Vision")]
         [SerializeField] protected LayerMask _obstacleMask = ~0;
-
         [Header("Material")]
         [SerializeField] protected Material _coneMaterial;
         [SerializeField] protected int _sortOrder = 1;
-
         [Header("Optimization")]
         [SerializeField] protected int _precision = 300;
 
-        protected MeshRenderer _meshRenderer;
+        private MeshRenderer _meshRenderer;
         protected MeshFilter _meshFilter;
 
-        protected bool _isInitialized;
+        private bool _isInitialized;
 
         protected float _lastAngle;
         protected float _lastRange;
         protected int _lastPrecision;
-        protected Vector3 _lastPosition;
-        protected Quaternion _lastRotation;
+        private Vector3 _lastPosition;
+        private Quaternion _lastRotation;
 
         protected readonly List<Vector3> _vertices = new();
         protected readonly List<int> _triangles = new();
@@ -92,10 +90,10 @@ namespace Code.VisionCone
 
         protected virtual void OnValidate()
         {
-            if (!Application.isPlaying && _meshFilter != null)
-            {
-                GenerateMesh();
-            }
+            if (Application.isPlaying || _meshFilter == null) 
+                return;
+            
+            GenerateMesh();
         }
         
         protected virtual bool ParamsChanged() =>

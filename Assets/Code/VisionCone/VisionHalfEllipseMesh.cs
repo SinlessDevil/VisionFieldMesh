@@ -76,15 +76,12 @@ namespace Code.VisionCone
             mesh.SetUVs(0, _uv);
         }
         
-        protected override bool ParamsChanged()
-        {
-            return
-                _lastWidth != _width ||
-                _lastHeight != _height ||
-                _lastSegments != _segments ||
-                _lastOffset != _centerOffset ||
-                base.ParamsChanged();
-        }
+        protected override bool ParamsChanged() =>
+            _lastWidth != _width ||
+            _lastHeight != _height ||
+            _lastSegments != _segments ||
+            _lastOffset != _centerOffset ||
+            base.ParamsChanged();
 
         protected override void CacheParams()
         {
@@ -95,9 +92,9 @@ namespace Code.VisionCone
             base.CacheParams();
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-#if UNITY_EDITOR
             if (!enabled || _segments < 2)
                 return;
 
@@ -133,7 +130,7 @@ namespace Code.VisionCone
 
             Gizmos.color = Color.white;
             Gizmos.DrawSphere(origin, 0.05f);
-#endif
         }
+#endif
     }
 }

@@ -4,7 +4,7 @@ namespace Code.VisionCone
 {
     public class VisionArrowMesh : BaseVisionMesh
     {
-         [SerializeField] private float _width = 2f;
+        [SerializeField] private float _width = 2f;
         [SerializeField] private float _height = 2f;
         [SerializeField, Range(-45, 45)] private float _tiltAngle = 0f;
         [SerializeField, Range(4, 256)] private int _segments = 64;
@@ -86,6 +86,22 @@ namespace Code.VisionCone
             };
         }
 
+        protected override bool ParamsChanged() =>
+            _lastWidth != _width ||
+            _lastHeight != _height ||
+            _lastTilt != _tiltAngle ||
+            _lastSegments != _segments ||
+            base.ParamsChanged();
+
+        protected override void CacheParams()
+        {
+            _lastWidth = _width;
+            _lastHeight = _height;
+            _lastTilt = _tiltAngle;
+            _lastSegments = _segments;
+            base.CacheParams();
+        }
+        
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
@@ -93,7 +109,6 @@ namespace Code.VisionCone
                 return;
 
             Vector3 origin = transform.position;
-            Quaternion rotation = transform.rotation;
             Quaternion tilt = Quaternion.Euler(0f, _tiltAngle, 0f);
 
             float halfWidth = _width / 2f;
@@ -126,21 +141,5 @@ namespace Code.VisionCone
             Gizmos.DrawSphere(origin, 0.05f);
         }
 #endif
-
-        protected override bool ParamsChanged() =>
-            _lastWidth != _width ||
-            _lastHeight != _height ||
-            _lastTilt != _tiltAngle ||
-            _lastSegments != _segments ||
-            base.ParamsChanged();
-
-        protected override void CacheParams()
-        {
-            _lastWidth = _width;
-            _lastHeight = _height;
-            _lastTilt = _tiltAngle;
-            _lastSegments = _segments;
-            base.CacheParams();
-        }
     }
 }

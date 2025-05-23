@@ -85,7 +85,10 @@ namespace Code.VisionCone
         }
         
         protected override bool ParamsChanged() =>
-            _lastSideLength != _sideLength || _lastAngle != _angleDegrees || _lastSegments != _segments || base.ParamsChanged();
+            _lastSideLength != _sideLength || 
+            _lastAngle != _angleDegrees || 
+            _lastSegments != _segments || 
+            base.ParamsChanged();
 
         protected override void CacheParams()
         {
@@ -102,7 +105,6 @@ namespace Code.VisionCone
                 return;
 
             Vector3 origin = transform.position;
-            Quaternion rotation = transform.rotation;
 
             float angleRad = _angleDegrees * Mathf.Deg2Rad;
             float halfDiagH = Mathf.Cos(angleRad / 2f) * _sideLength;
@@ -134,6 +136,5 @@ namespace Code.VisionCone
             Gizmos.DrawSphere(origin, 0.05f);
         }
 #endif
-
     }
 }

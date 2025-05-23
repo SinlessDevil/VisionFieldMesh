@@ -86,6 +86,21 @@ namespace Code.VisionCone
             };
         }
 
+        protected override bool ParamsChanged() =>
+            _lastWidth != _width ||
+            _lastHeight != _height ||
+            _lastSegments != _segments ||
+            base.ParamsChanged();
+
+        protected override void CacheParams()
+        {
+            _lastWidth = _width;
+            _lastHeight = _height;
+            _lastSegments = _segments;
+            base.CacheParams();
+        }
+        
+        
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
@@ -114,19 +129,5 @@ namespace Code.VisionCone
             }
         }
 #endif
-
-        protected override bool ParamsChanged() =>
-            _lastWidth != _width ||
-            _lastHeight != _height ||
-            _lastSegments != _segments ||
-            base.ParamsChanged();
-
-        protected override void CacheParams()
-        {
-            _lastWidth = _width;
-            _lastHeight = _height;
-            _lastSegments = _segments;
-            base.CacheParams();
-        }
     }
 }

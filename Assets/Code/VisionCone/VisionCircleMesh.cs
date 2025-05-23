@@ -107,9 +107,9 @@ namespace Code.VisionCone
             _precomputedDirs = dirs.ToArray();
         }
         
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-#if UNITY_EDITOR
             Vector3 origin = transform.position;
             Quaternion rotation = transform.rotation;
 
@@ -136,7 +136,7 @@ namespace Code.VisionCone
                     Gizmos.DrawLine(origin, origin + dirWorld * _visionRange);
                 }
             }
-#endif
         }
+#endif
     }
 }
