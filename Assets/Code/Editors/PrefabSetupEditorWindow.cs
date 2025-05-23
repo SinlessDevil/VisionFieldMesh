@@ -200,5 +200,71 @@ namespace Code.Editors
 
             Debug.Log($"<color=green>Applied MeshRenderer settings to {count} objects under '{_rootObject.name}'.</color>");
         }
+        
+        [BoxGroup("Add Collider To Meshes")]
+        [LabelText("Collider Type")]
+        [SerializeField]
+        private ColliderType _colliderType;
+
+        [BoxGroup("Add Collider To Meshes")]
+        [LabelText("Remove Existing Colliders First")]
+        [SerializeField]
+        private bool _removeExistingColliders = true;
+
+        [BoxGroup("Add Collider To Meshes")]
+        [Button(ButtonSizes.Large)]
+        [GUIColor(1f, 0.5f, 0.5f)]
+        private void AddCollidersToMeshes()
+        {
+            if (_rootObject == null)
+            {
+                Debug.LogError("<color=red>Assign a root object first.</color>");
+                return;
+            }
+
+            int count = 0;
+            var meshFilters = _rootObject.GetComponentsInChildren<MeshFilter>(true);
+
+            foreach (var mf in meshFilters)
+            {
+                var go = mf.gameObject;
+
+                if (_removeExistingColliders)
+                {
+                    foreach (var col in go.GetComponents<Collider>())
+                        DestroyImmediate(col);
+                }
+
+                switch (_colliderType)
+                {
+                    case ColliderType.Box:
+                        go.AddComponent<BoxCollider>();
+                        break;
+                    case ColliderType.Sphere:
+                        go.AddComponent<SphereCollider>();
+                        break;
+                    case ColliderType.Capsule:
+                        go.AddComponent<CapsuleCollider>();
+                        break;
+                    case ColliderType.Mesh:
+                        var mc = go.AddComponent<MeshCollider>();
+                        mc.sharedMesh = mf.sharedMesh;
+                        mc.convex = false;
+                        break;
+                }
+
+                count++;
+            }
+
+            Debug.Log($"<color=green>Added {_colliderType} to {count} mesh objects under '{_rootObject.name}'.</color>");
+        }
+    }
+    
+    public enum ColliderType
+    {
+        Box,
+        Sphere,
+        Capsule,
+        Mesh
     }
 }
