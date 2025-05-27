@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.Levels;
 using UnityEngine;
 
 namespace Code.Infrastructure.Services.GameStater
@@ -8,6 +9,7 @@ namespace Code.Infrastructure.Services.GameStater
         void Initialize();
         void SetPlayerSpawnPoint(Transform playerSpawnPoint);
         void SetEnemySpawnPoints(List<Transform> enemySpawnPoints);
+        void SetLevelController(LevelController levelViewController);
         void Dispose();
     }
 }

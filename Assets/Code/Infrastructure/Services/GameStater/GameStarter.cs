@@ -5,6 +5,7 @@ using Code.Infrastructure.Factory;
 using Code.Infrastructure.Services.PersistenceProgress;
 using Code.Infrastructure.Services.PersistenceProgress.Player;
 using Code.Infrastructure.Services.SaveLoad;
+using Code.Levels;
 using Code.Players;
 using Code.Players.Factory;
 using Code.VisionCone;
@@ -22,6 +23,7 @@ namespace Code.Infrastructure.Services.GameStater
         
         private Transform _playerSpawnPoint;
         private List<Transform> _enemySpawnPoints;
+        private LevelController _levelViewController;
 
         public GameStarter(
             IPersistenceProgressService progressService,
@@ -56,10 +58,16 @@ namespace Code.Infrastructure.Services.GameStater
             _enemySpawnPoints = enemySpawnPoints;
         }
 
+        public void SetLevelController(LevelController levelViewController)
+        {
+            _levelViewController = levelViewController;
+        }
+
         public void Dispose()
         {
             _playerSpawnPoint = null;
             _enemySpawnPoints = null;
+            _levelViewController = null;
         }
         
         private void InitProgress()
@@ -91,13 +99,16 @@ namespace Code.Infrastructure.Services.GameStater
         
         private void InitLevel()
         {
-            Debug.Log("InitLevel");
             Player player = _playerFactory.CreatePlayer(_playerSpawnPoint.position, new VisionArrowMesh());
 
             List<Enemy> enemies = _enemySpawnPoints
                 .Select(enemySpawnPoint => _enemyFactory
                     .CreateEnemy(enemySpawnPoint.position))
                 .ToList();
+         
+            _levelViewController.Initialize(player, enemies);
+            
+            Debug.Log("InitLevel");
         }
     }
 }

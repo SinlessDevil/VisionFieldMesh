@@ -8,9 +8,16 @@ namespace Code.Levels
 {
     public class LevelController : MonoBehaviour
     {
-        [SerializeField] private Player _player;
-        [SerializeField] private List<Enemy> _enemies;
         [SerializeField] private List<Transform> _pathPoints;
+     
+        private Player _player;
+        private List<Enemy> _enemies;
+        
+        public void Initialize(Player player, List<Enemy> enemies)
+        {
+            _player = player;
+            _enemies = enemies;
+        }
         
         [Button]
         public void PlayLevel()
