@@ -7,38 +7,18 @@ namespace Code.Editors
     [CustomEditor(typeof(LevelPathMover))]
     public class LevelPathMoverEditor : Editor
     {
-        private const float NewPointOffset = 0.5f;
         private const string InsertKeyPrefsKey = "ColliderMesh_InsertKey";
         private const string DeleteKeyPrefsKey = "ColliderMesh_DeleteKey";
 
         private LevelPathMover _mover;
         private int _activeHandleIndex = -1;
 
-        private KeyCode InsertKey
-        {
-            get => (KeyCode)EditorPrefs.GetInt(InsertKeyPrefsKey, (int)KeyCode.Q);
-            set => EditorPrefs.SetInt(InsertKeyPrefsKey, (int)value);
-        }
-
-        private KeyCode DeleteKey
-        {
-            get => (KeyCode)EditorPrefs.GetInt(DeleteKeyPrefsKey, (int)KeyCode.E);
-            set => EditorPrefs.SetInt(DeleteKeyPrefsKey, (int)value);
-        }
+        private KeyCode InsertKey => (KeyCode)EditorPrefs.GetInt(InsertKeyPrefsKey, (int)KeyCode.Q);
+        private KeyCode DeleteKey => (KeyCode)EditorPrefs.GetInt(DeleteKeyPrefsKey, (int)KeyCode.E);
 
         private void OnEnable()
         {
             _mover = (LevelPathMover)target;
-        }
-
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-
-            EditorGUILayout.Space(10);
-            EditorGUILayout.LabelField("[ Edit Hotkeys ]", EditorStyles.boldLabel);
-            InsertKey = (KeyCode)EditorGUILayout.EnumPopup("Add Point Key:", InsertKey);
-            DeleteKey = (KeyCode)EditorGUILayout.EnumPopup("Delete Point Key:", DeleteKey);
         }
 
         private void OnSceneGUI()
@@ -72,7 +52,8 @@ namespace Code.Editors
         private void HandleKeyboardInput()
         {
             Event e = Event.current;
-            if (e.type != EventType.KeyDown) return;
+            if (e.type != EventType.KeyDown) 
+                return;
 
             if (e.keyCode == InsertKey)
             {
