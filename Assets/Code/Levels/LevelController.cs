@@ -3,15 +3,19 @@ using UnityEngine;
 using Code.Players;
 using Code.VisionCone;
 using Code.VisionCone.Factory;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 
 namespace Code.Levels
 {
     public class LevelController : MonoBehaviour
     {
+        [Header("Level Components")]
         [SerializeField] private LevelPathMover _levelPathMover;
-        [Space(10)]
+        
+        [Space(20)] [Header("Start Game")]
         [SerializeField] private VisionType _visionType;
+        [SerializeField] private float _timeLevel = 30f;
         
         private Player _player;
         private List<Enemy> _enemies;
@@ -30,7 +34,19 @@ namespace Code.Levels
         [Button]
         public void PlayLevel()
         {
-            
+            GameObject playerPosition = _player.ParentVisionMesh;
+            IVisionMeshGenerator visionCone = _visionConeFactory.CreateVisionMesh(playerPosition, _visionType);
+            _player.SetBaseVisionMesh(visionCone);
+            //
+            // _player.transform.DOMovePath(_levelPathMover.Points, _timeLevel,
+            //         PathType.CatmullRom,
+            //         PathMode.Full3D,
+            //         10,
+            //         Color.green)
+            //     .SetOptions(true)
+            //     .SetEase(Ease.Linear)
+            //     .OnComplete(() => Debug.Log("Level Completed!"));
+
         }
     }
 }

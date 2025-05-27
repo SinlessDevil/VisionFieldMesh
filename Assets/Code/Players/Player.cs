@@ -9,10 +9,11 @@ namespace Code.Players
         
         private IVisionMeshGenerator _visionMeshGenerator;
         
-        public void SetVisionMeshGenerator(IVisionMeshGenerator visionMeshGenerator)
+        public GameObject ParentVisionMesh => _parentVisionMesh;
+        
+        public void SetBaseVisionMesh(IVisionMeshGenerator visionMeshGenerator)
         {
             _visionMeshGenerator = visionMeshGenerator;
         }
-        
     }    
 }
