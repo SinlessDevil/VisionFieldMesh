@@ -6,7 +6,7 @@ namespace Code.Players.Factory
 {
     public class PlayerFactory : Infrastructure.Factory.Factory, IPlayerFactory
     {
-        private const string PlayerPrefabPath = "Player/Player.prefab";
+        private const string PlayerPrefabPath = "Player/Player";
         
         public PlayerFactory(IInstantiator instantiator) : base(instantiator)
         {
@@ -17,6 +17,7 @@ namespace Code.Players.Factory
         {
             var gameObject = Instantiate(PlayerPrefabPath, position, Quaternion.identity, null);
             var player = gameObject.GetComponent<Player>();
+            player.transform.position = position;
             player.SetVisionMeshGenerator(visionMeshGenerator);
             return player;
         }

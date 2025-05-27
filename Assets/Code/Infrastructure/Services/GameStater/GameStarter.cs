@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.Services.PersistenceProgress;
 using Code.Infrastructure.Services.PersistenceProgress.Player;
 using Code.Infrastructure.Services.SaveLoad;
+using Code.Players.Factory;
+using Code.VisionCone;
 using UnityEngine;
 
 namespace Code.Infrastructure.Services.GameStater
@@ -11,15 +14,21 @@ namespace Code.Infrastructure.Services.GameStater
         private readonly IPersistenceProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IUIFactory _uiFactory;
+        private readonly IPlayerFactory _playerFactory;
         
+        private Transform _playerSpawnPoint;
+        private List<Transform> _enemySpawnPoints;
+
         public GameStarter(
             IPersistenceProgressService progressService,
             ISaveLoadService saveLoadService, 
-            IUIFactory uiFactory)
+            IUIFactory uiFactory, 
+            IPlayerFactory playerFactory)
         {
             _progressService = progressService;
             _saveLoadService = saveLoadService;
             _uiFactory = uiFactory;
+            _playerFactory = playerFactory;
         }
 
         public void Initialize()
@@ -28,6 +37,23 @@ namespace Code.Infrastructure.Services.GameStater
             
             InitProgress();
             InitUI();
+            InitLevel();
+        }
+
+        public void SetPlayerSpawnPoint(Transform playerSpawnPoint)
+        {
+            _playerSpawnPoint = playerSpawnPoint;
+        }
+
+        public void SetEnemySpawnPoints(List<Transform> enemySpawnPoints)
+        {
+            _enemySpawnPoints = enemySpawnPoints;
+        }
+
+        public void Dispose()
+        {
+            _playerSpawnPoint = null;
+            _enemySpawnPoints = null;
         }
         
         private void InitProgress()
@@ -51,9 +77,16 @@ namespace Code.Infrastructure.Services.GameStater
         private PlayerData SetUpBaseProgress()
         {
             Debug.Log("InitializeProgress");
+            
             var progress = new PlayerData();
             _progressService.PlayerData = progress;
             return progress;
+        }
+        
+        private void InitLevel()
+        {
+            Debug.Log("InitLevel");
+            var player = _playerFactory.CreatePlayer(_playerSpawnPoint.position, new VisionArrowMesh());
         }
     }
 }

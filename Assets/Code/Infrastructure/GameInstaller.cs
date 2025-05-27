@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using Code.Infrastructure.Services.GameStater;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Infrastructure
+namespace Code.Infrastructure
 {
     public class GameInstaller : MonoInstaller, IInitializable, IDisposable
     {
-        [SerializeField] private GameObject _mapHolder;
+        [SerializeField] private Transform _playerSpawnPoint;
+        [SerializeField] private List<Transform> _enemSpawnPoints;
         
         public override void InstallBindings()
         {
@@ -17,12 +19,14 @@ namespace CodeBase.Infrastructure
 
         public void Initialize()
         {
+            Container.Resolve<IGameStarter>().SetPlayerSpawnPoint(_playerSpawnPoint);
+            Container.Resolve<IGameStarter>().SetEnemySpawnPoints(_enemSpawnPoints);
             Container.Resolve<IGameStarter>().Initialize();
         }
 
         public void Dispose()
         {
-            
+            Container.Resolve<IGameStarter>().Dispose();
         }
     }
 }

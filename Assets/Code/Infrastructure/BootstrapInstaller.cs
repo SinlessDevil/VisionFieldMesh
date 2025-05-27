@@ -2,6 +2,7 @@ using Code.Infrastructure.Factory;
 using Code.Infrastructure.Services.PersistenceProgress;
 using Code.Infrastructure.Services.SaveLoad;
 using Code.Infrastructure.Services.StaticData;
+using Code.Players.Factory;
 using Services.PersistenceProgress;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -24,6 +25,8 @@ namespace Code.Infrastructure
 
         private void BindFactory()
         {
+            Container.BindInterfacesTo<PlayerFactory>().AsSingle();
+            
             Container.BindInterfacesTo<UIFactory>().AsSingle();
         }
         
