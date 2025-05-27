@@ -13,5 +13,6 @@ namespace Code.Players
         {
             _visionMeshGenerator = visionMeshGenerator;
         }
+        
     }    
 }

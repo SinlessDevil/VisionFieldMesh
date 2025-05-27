@@ -3,7 +3,11 @@
     "rootNamespace": "",
     "references": [
         "Zenject",
-        "ConcaveHull"
+        "UniTask.Addressables",
+        "UniTask.DOTween",
+        "UniTask.TextMeshPro",
+        "UniTask",
+        ""
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

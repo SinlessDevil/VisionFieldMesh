@@ -9,6 +9,7 @@ using Code.Levels;
 using Code.Players;
 using Code.Players.Factory;
 using Code.VisionCone;
+using Code.VisionCone.Factory;
 using UnityEngine;
 
 namespace Code.Infrastructure.Services.GameStater
@@ -20,6 +21,7 @@ namespace Code.Infrastructure.Services.GameStater
         private readonly IUIFactory _uiFactory;
         private readonly IPlayerFactory _playerFactory;
         private readonly IEnemyFactory _enemyFactory;
+        private readonly IVisionConeFactory _visionConeFactory;
         
         private Transform _playerSpawnPoint;
         private List<Transform> _enemySpawnPoints;
@@ -30,13 +32,15 @@ namespace Code.Infrastructure.Services.GameStater
             ISaveLoadService saveLoadService, 
             IUIFactory uiFactory, 
             IPlayerFactory playerFactory, 
-            IEnemyFactory enemyFactory)
+            IEnemyFactory enemyFactory, 
+            IVisionConeFactory visionConeFactory)
         {
             _progressService = progressService;
             _saveLoadService = saveLoadService;
             _uiFactory = uiFactory;
             _playerFactory = playerFactory;
             _enemyFactory = enemyFactory;
+            _visionConeFactory = visionConeFactory;
         }
 
         public void Initialize()
@@ -106,7 +110,7 @@ namespace Code.Infrastructure.Services.GameStater
                     .CreateEnemy(enemySpawnPoint.position))
                 .ToList();
          
-            _levelViewController.Initialize(player, enemies);
+            _levelViewController.Initialize(player, enemies, _visionConeFactory);
             
             Debug.Log("InitLevel");
         }
