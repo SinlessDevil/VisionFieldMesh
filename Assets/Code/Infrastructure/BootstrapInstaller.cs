@@ -4,6 +4,7 @@ using Code.Infrastructure.Services.PersistenceProgress;
 using Code.Infrastructure.Services.SaveLoad;
 using Code.Infrastructure.Services.StaticData;
 using Code.Players.Factory;
+using Code.VisionCone.Factory;
 using Services.PersistenceProgress;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -28,6 +29,7 @@ namespace Code.Infrastructure
         {
             Container.BindInterfacesTo<PlayerFactory>().AsSingle();
             Container.BindInterfacesTo<EnemyFactory>().AsSingle();
+            Container.BindInterfacesTo<VisionConeFactory>().AsSingle();
             
             Container.BindInterfacesTo<UIFactory>().AsSingle();
         }

@@ -1,14 +1,14 @@
 using System.Collections.Generic;
+using UnityEngine;
 using Code.Players;
 using Code.VisionCone;
 using Sirenix.OdinInspector;
-using UnityEngine;
 
 namespace Code.Levels
 {
     public class LevelController : MonoBehaviour
     {
-        [SerializeField] private List<Transform> _pathPoints;
+        [SerializeField] private LevelController _levelController;
      
         private Player _player;
         private List<Enemy> _enemies;
@@ -24,29 +24,5 @@ namespace Code.Levels
         {
             
         }
-
-        private BaseVisionMesh GetBaseVisionMeshByType(VisionType visionType)
-        {
-            return visionType switch
-            {
-                VisionType.Circle => gameObject.AddComponent<VisionCircleMesh>(),
-                VisionType.Square => gameObject.AddComponent<VisionSquareMesh>(),
-                VisionType.OffsetTriangle => gameObject.AddComponent<VisionOffsetTriangleMesh>(),
-                VisionType.HalfEllipse => gameObject.AddComponent<VisionHalfEllipseMesh>(),
-                VisionType.Arrow => gameObject.AddComponent<VisionArrowMesh>(),
-                VisionType.Rhombus => gameObject.AddComponent<VisionRhombusMesh>(),
-                _ => null
-            };
-        }
-    }
-
-    public enum VisionType
-    {
-        Circle = 0,
-        Square = 1,
-        OffsetTriangle = 2,
-        HalfEllipse = 3,
-        Arrow = 4,
-        Rhombus = 5,
     }
 }
