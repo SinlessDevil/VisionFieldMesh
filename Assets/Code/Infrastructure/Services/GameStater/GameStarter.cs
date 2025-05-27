@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
+using Code.Enemies.Factory;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.Services.PersistenceProgress;
 using Code.Infrastructure.Services.PersistenceProgress.Player;
 using Code.Infrastructure.Services.SaveLoad;
+using Code.Players;
 using Code.Players.Factory;
 using Code.VisionCone;
 using UnityEngine;
@@ -15,6 +18,7 @@ namespace Code.Infrastructure.Services.GameStater
         private readonly ISaveLoadService _saveLoadService;
         private readonly IUIFactory _uiFactory;
         private readonly IPlayerFactory _playerFactory;
+        private readonly IEnemyFactory _enemyFactory;
         
         private Transform _playerSpawnPoint;
         private List<Transform> _enemySpawnPoints;
@@ -86,7 +90,12 @@ namespace Code.Infrastructure.Services.GameStater
         private void InitLevel()
         {
             Debug.Log("InitLevel");
-            var player = _playerFactory.CreatePlayer(_playerSpawnPoint.position, new VisionArrowMesh());
+            Player player = _playerFactory.CreatePlayer(_playerSpawnPoint.position, new VisionArrowMesh());
+
+            List<Enemy> enemies = _enemySpawnPoints
+                .Select(enemySpawnPoint => _enemyFactory
+                    .CreateEnemy(enemySpawnPoint.position))
+                .ToList();
         }
     }
 }

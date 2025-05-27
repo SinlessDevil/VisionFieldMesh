@@ -1,3 +1,4 @@
+using Code.Enemies.Factory;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.Services.PersistenceProgress;
 using Code.Infrastructure.Services.SaveLoad;
@@ -26,6 +27,7 @@ namespace Code.Infrastructure
         private void BindFactory()
         {
             Container.BindInterfacesTo<PlayerFactory>().AsSingle();
+            Container.BindInterfacesTo<EnemyFactory>().AsSingle();
             
             Container.BindInterfacesTo<UIFactory>().AsSingle();
         }
