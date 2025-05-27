@@ -93,7 +93,7 @@ namespace Code.Editors
                 : _mover.Points.Count;
 
             Vector3 basePoint = insertIndex > 0 ? _mover.Points[insertIndex - 1] : Vector3.zero;
-            _mover.Points.Insert(insertIndex, basePoint + Vector3.right * NewPointOffset);
+            _mover.Points.Insert(insertIndex, basePoint);
             _activeHandleIndex = insertIndex;
 
             EditorUtility.SetDirty(_mover);
