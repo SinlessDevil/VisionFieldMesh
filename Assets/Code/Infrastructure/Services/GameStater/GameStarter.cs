@@ -27,12 +27,14 @@ namespace Code.Infrastructure.Services.GameStater
             IPersistenceProgressService progressService,
             ISaveLoadService saveLoadService, 
             IUIFactory uiFactory, 
-            IPlayerFactory playerFactory)
+            IPlayerFactory playerFactory, 
+            IEnemyFactory enemyFactory)
         {
             _progressService = progressService;
             _saveLoadService = saveLoadService;
             _uiFactory = uiFactory;
             _playerFactory = playerFactory;
+            _enemyFactory = enemyFactory;
         }
 
         public void Initialize()
