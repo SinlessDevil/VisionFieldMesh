@@ -167,6 +167,90 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 9042771077998628582, guid: 17e3c281b5969014dbde0cd911819aad, type: 3}
+--- !u!1 &22426433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 22426435}
+  - component: {fileID: 22426434}
+  m_Layer: 0
+  m_Name: Level Path Mover
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &22426434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22426433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30249ef1709935148921e94294ee9441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _points:
+  - {x: 18.66934, y: 2, z: 15.848707}
+  - {x: 19.489918, y: 2, z: 23.260056}
+  - {x: 25.610027, y: 2, z: 18.535992}
+  - {x: 32.725933, y: 2, z: 21.108564}
+  - {x: 33.33031, y: 2, z: 28.374664}
+  - {x: 29.86516, y: 2, z: 27.70962}
+  - {x: 20.300312, y: 2, z: 31.222603}
+  - {x: 26.526768, y: 2, z: 37.320618}
+  - {x: 27.898565, y: 2, z: 50.1006}
+  - {x: 25.74263, y: 2, z: 55.745014}
+  - {x: 21.015009, y: 2, z: 50.631355}
+  - {x: 16.673714, y: 2, z: 36.759487}
+  - {x: 9.871885, y: 2, z: 44.587055}
+  - {x: -0.4947543, y: 2, z: 43.728767}
+  - {x: -3.152049, y: 2, z: 51.404587}
+  - {x: 2.6386642, y: 2, z: 53.437492}
+  - {x: 4.746716, y: 2, z: 57.807316}
+  - {x: 3.8927612, y: 2, z: 71.99309}
+  - {x: 13.529404, y: 2, z: 61.22572}
+  - {x: 17.294722, y: 2, z: 71.81512}
+  - {x: 23.606325, y: 2, z: 68.10438}
+  - {x: 28.807596, y: 2, z: 71.68576}
+  - {x: 23.646397, y: 2, z: 81.694534}
+  - {x: 12.991934, y: 2, z: 84.06838}
+  - {x: 3.594522, y: 2, z: 79.61099}
+  - {x: 0.5763817, y: 2, z: 89.786934}
+  - {x: -13.3998375, y: 2, z: 87.52289}
+  - {x: -8.942626, y: 2, z: 78.40565}
+  - {x: -14.533753, y: 2, z: 69.26347}
+  - {x: -25.368118, y: 2, z: 72.220894}
+  - {x: -31.100033, y: 2, z: 66.91732}
+  - {x: -24.501442, y: 2, z: 62.099117}
+  - {x: -16.536844, y: 2, z: 45.8206}
+  - {x: -22.348852, y: 2, z: 32.511387}
+  - {x: -20.937815, y: 2, z: 16.2033}
+  _lineColor: {r: 0, g: 1, b: 0, a: 1}
+  _pointColor: {r: 1, g: 0, b: 0, a: 1}
+  _pointSize: 0.2
+  _loopPath: 0
+--- !u!4 &22426435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22426433}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &29437270
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1510,7 +1594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 330969507}
   m_Layer: 0
-  m_Name: '[Points]'
+  m_Name: Spawn Points
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5391,7 +5475,7 @@ GameObject:
   - component: {fileID: 1415499229}
   - component: {fileID: 1415499228}
   m_Layer: 0
-  m_Name: LevelViewController
+  m_Name: Level View Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5409,8 +5493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ecad132af6b9b4fa58bc70a238b236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _enemies: []
   _pathPoints: []
 --- !u!4 &1415499229
 Transform:
@@ -11548,3 +11630,4 @@ SceneRoots:
   - {fileID: 2147436721}
   - {fileID: 330969507}
   - {fileID: 1415499229}
+  - {fileID: 22426435}
