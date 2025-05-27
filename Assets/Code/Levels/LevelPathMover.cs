@@ -15,7 +15,11 @@ namespace Code.Levels
         [SerializeField] private Color _pointColor = Color.red;
         [SerializeField] private float _pointSize = 0.2f;
 
+        [Space(10), Header("Path Settings")]
+        [SerializeField] private bool _loopPath = false;
+
         public List<Vector3> Points => _points;
+        public bool LoopPath => _loopPath;
 
         private void Reset()
         {
@@ -33,7 +37,8 @@ namespace Code.Levels
                 return;
 
             Gizmos.color = _lineColor;
-            for (int i = 0; i < _points.Count; i++)
+            int count = _loopPath ? _points.Count : _points.Count - 1;
+            for (int i = 0; i < count; i++)
             {
                 Vector3 worldPos = transform.TransformPoint(_points[i]);
                 Vector3 next = transform.TransformPoint(_points[(i + 1) % _points.Count]);
