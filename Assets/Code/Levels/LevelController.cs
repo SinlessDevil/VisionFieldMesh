@@ -34,11 +34,21 @@ namespace Code.Levels
         [Button]
         public void PlayLevel()
         {
+            SetVisionConeToPlayer();
+
+            PlayAnimationMovePlayer();
+        }
+
+        private void SetVisionConeToPlayer()
+        {
             GameObject playerPosition = _player.ParentVisionMesh;
             IVisionMeshGenerator visionCone = _visionConeFactory.CreateVisionMesh(playerPosition, _visionType);
             _player.SetBaseVisionMesh(visionCone);
-            
-            _player.transform.DOPath(_levelPathMover.Points.ToArray(), _timeLevel,
+        }
+        
+        private void PlayAnimationMovePlayer()
+        {
+            _player.transform.DOPath(GetPath(), _timeLevel,
                     PathType.CatmullRom,
                     PathMode.Full3D,
                     10,
@@ -46,7 +56,13 @@ namespace Code.Levels
                 .SetOptions(true)
                 .SetEase(Ease.Linear)
                 .OnComplete(() => Debug.Log("Level Completed!"));
-
+        }
+        
+        private Vector3[] GetPath()
+        {
+            List<Vector3> path = _levelPathMover.Points;
+            path.Reverse();
+            return path.ToArray();
         }
     }
 }
