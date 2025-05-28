@@ -231,7 +231,7 @@ MonoBehaviour:
   - {x: -24.501442, y: 0, z: 62.099117}
   - {x: -16.536844, y: 0, z: 45.8206}
   - {x: -22.348852, y: 0, z: 32.511387}
-  - {x: -20.937815, y: 0, z: 16.2033}
+  - {x: -22.254263, y: 0, z: 19.994148}
   _lineColor: {r: 0, g: 1, b: 0, a: 1}
   _pointColor: {r: 1, g: 0, b: 0, a: 1}
   _pointSize: 0.2
@@ -6806,7 +6806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3414927399961227974, guid: 17e3c281b5969014dbde0cd911819aad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.32
+      value: 2.11
       objectReference: {fileID: 0}
     - target: {fileID: 3414927399961227974, guid: 17e3c281b5969014dbde0cd911819aad, type: 3}
       propertyPath: m_LocalPosition.z

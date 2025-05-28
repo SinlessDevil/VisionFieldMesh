@@ -7,7 +7,7 @@
         "UniTask.DOTween",
         "UniTask.TextMeshPro",
         "UniTask",
-        ""
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
