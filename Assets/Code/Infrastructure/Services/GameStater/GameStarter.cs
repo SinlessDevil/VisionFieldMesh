@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Cameras.Provider;
 using Code.Enemies.Factory;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.Services.PersistenceProgress;
@@ -22,6 +23,7 @@ namespace Code.Infrastructure.Services.GameStater
         private readonly IPlayerFactory _playerFactory;
         private readonly IEnemyFactory _enemyFactory;
         private readonly IVisionConeFactory _visionConeFactory;
+        private readonly ICameraProvider _cameraProvider;
         
         private Transform _playerSpawnPoint;
         private List<Transform> _enemySpawnPoints;
@@ -33,7 +35,8 @@ namespace Code.Infrastructure.Services.GameStater
             IUIFactory uiFactory, 
             IPlayerFactory playerFactory, 
             IEnemyFactory enemyFactory, 
-            IVisionConeFactory visionConeFactory)
+            IVisionConeFactory visionConeFactory, 
+            ICameraProvider cameraProvider)
         {
             _progressService = progressService;
             _saveLoadService = saveLoadService;
@@ -41,6 +44,7 @@ namespace Code.Infrastructure.Services.GameStater
             _playerFactory = playerFactory;
             _enemyFactory = enemyFactory;
             _visionConeFactory = visionConeFactory;
+            _cameraProvider = cameraProvider;
         }
 
         public void Initialize()
@@ -49,6 +53,7 @@ namespace Code.Infrastructure.Services.GameStater
             
             InitProgress();
             InitUI();
+            InitCamera();
             InitLevel();
         }
 
@@ -103,16 +108,32 @@ namespace Code.Infrastructure.Services.GameStater
         
         private void InitLevel()
         {
-            Player player = _playerFactory.CreatePlayer(_playerSpawnPoint.position, new VisionArrowMesh());
-
-            List<Enemy> enemies = _enemySpawnPoints
-                .Select(enemySpawnPoint => _enemyFactory
-                    .CreateEnemy(enemySpawnPoint.position))
-                .ToList();
+            var player = InitPlayer();
+            var enemies = InitEnemies();
          
             _levelViewController.Initialize(player, enemies, _visionConeFactory);
             
             Debug.Log("InitLevel");
+        }
+
+        private List<Enemy> InitEnemies()
+        {
+            List<Enemy> enemies = _enemySpawnPoints
+                .Select(enemySpawnPoint => _enemyFactory
+                    .CreateEnemy(enemySpawnPoint.position))
+                .ToList();
+            return enemies;
+        }
+
+        private Player InitPlayer()
+        {
+            Player player = _playerFactory.CreatePlayer(_playerSpawnPoint.position, new VisionArrowMesh());
+            return player;
+        }
+
+        private void InitCamera()
+        {
+            _cameraProvider.SetMainCamera(Camera.main);
         }
     }
 }

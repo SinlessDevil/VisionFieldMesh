@@ -1,3 +1,4 @@
+using Code.Cameras.Provider;
 using Code.Enemies.Factory;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.Services.PersistenceProgress;
@@ -22,6 +23,7 @@ namespace Code.Infrastructure
             BindFactory();
             BindSaveLoad();
             BindProgressData();
+            BindCameraProvider();
             BindStaticData();
         }
 
@@ -39,6 +41,11 @@ namespace Code.Infrastructure
             Container.Bind<ISaveLoadService>().To<PrefsSaveLoadService>().AsSingle();
         }
 
+        private void BindCameraProvider()
+        {
+            Container.Bind<ICameraProvider>().To<CameraProvider>().AsSingle();
+        }
+        
         private void BindProgressData() =>
             Container.Bind<IPersistenceProgressService>().To<PersistenceProgressService>().AsSingle();
         
