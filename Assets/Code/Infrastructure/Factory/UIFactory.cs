@@ -1,5 +1,5 @@
+using Code.UI.Hud;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Code.Infrastructure.Factory
@@ -12,7 +12,7 @@ namespace Code.Infrastructure.Factory
         public UIFactory(IInstantiator instantiator) : base(instantiator) { }
 
         public Canvas UIRootCanvas { get; private set; }
-        public Canvas GameHudCanvas { get; private set; }
+        public GameHud GameHud { get; private set; }
         
         public void CreateUIRoot()
         {
@@ -20,10 +20,11 @@ namespace Code.Infrastructure.Factory
             UIRootCanvas = uiRoot.GetComponent<Canvas>();
         }
         
-        public void CreateGameHud()
+        public GameHud CreateGameHud()
         {
-            var gamehud = Instantiate(GameHudPath).transform;
-            GameHudCanvas = gamehud.GetComponent<Canvas>();
+            GameObject gameObject = Instantiate(GameHudPath);
+            GameHud = gameObject.GetComponent<GameHud>();
+            return GameHud;
         }
     }
 }

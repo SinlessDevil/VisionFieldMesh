@@ -11,6 +11,7 @@ using Code.Levels;
 using Code.Players;
 using Code.Players.Factory;
 using Code.Players.Provider;
+using Code.UI.Levels;
 using Code.VisionCone;
 using UnityEngine;
 
@@ -64,8 +65,21 @@ namespace Code.Infrastructure.Services.GameStater
             InitUI();
             InitCamera();
             InitLevel();
+            InitGameHud();
         }
 
+        private void InitGameHud()
+        {
+            _uiFactory.CreateGameHud();
+            _uiFactory.GameHud.Initialize(InitLevelPresenter());
+        }
+
+        private LevelPresenter InitLevelPresenter()
+        {
+            var levelPresenter = new LevelPresenter(_levelController);
+            return levelPresenter;
+        }
+        
         public void SetPlayerSpawnPoint(Transform playerSpawnPoint) => _playerSpawnPoint = playerSpawnPoint;
 
         public void SetEnemySpawnPoints(List<Transform> enemySpawnPoints) => _enemySpawnPoints = enemySpawnPoints;
@@ -74,11 +88,14 @@ namespace Code.Infrastructure.Services.GameStater
 
         public void Dispose()
         {
+            _uiFactory.GameHud.Dispose();
+            
             _playerSpawnPoint = null;
             _enemySpawnPoints = null;
             _levelPathMover = null;
             
             _levelController.Dispose();
+            
             _playerProvider.Dispose();
             _enemiesProvider.Dispose();
         }
@@ -91,7 +108,6 @@ namespace Code.Infrastructure.Services.GameStater
         private void InitUI()
         {
             _uiFactory.CreateUIRoot();
-            _uiFactory.CreateGameHud();
         }
         
         private PlayerData LoadProgress()

@@ -32,7 +32,7 @@ namespace Code.Levels
             _levelPathMover = levelPathMover;
         }
         
-        public void OnPlayLevel(VisionType visionType, float timeLevel)
+        public void PlayLevel(VisionType visionType, float timeLevel)
         {
             SetVisionConeToPlayer(visionType);
 

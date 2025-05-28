@@ -1,3 +1,4 @@
+using Code.UI.Hud;
 using UnityEngine;
 
 namespace Code.Infrastructure.Factory
@@ -5,8 +6,8 @@ namespace Code.Infrastructure.Factory
     public interface IUIFactory
     {
         Canvas UIRootCanvas { get; }
-        Canvas GameHudCanvas { get; }
+        GameHud GameHud { get; }
         void CreateUIRoot();
-        void CreateGameHud();
+        GameHud CreateGameHud();
     }
 }
