@@ -5087,6 +5087,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 143322853}
     - target: {fileID: 5416103028063818002, guid: 2d755eb7cc2356b49a3cbae28f48c2d1, type: 3}
+      propertyPath: _levelViewController
+      value: 
+      objectReference: {fileID: 1415499228}
+    - target: {fileID: 5416103028063818002, guid: 2d755eb7cc2356b49a3cbae28f48c2d1, type: 3}
       propertyPath: _enemSpawnPoints.Array.size
       value: 15
       objectReference: {fileID: 0}
@@ -5493,7 +5497,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ecad132af6b9b4fa58bc70a238b236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pathPoints: []
+  _levelPathMover: {fileID: 22426434}
+  _visionType: 0
+  _timeLevel: 30
 --- !u!4 &1415499229
 Transform:
   m_ObjectHideFlags: 0

@@ -37,15 +37,15 @@ namespace Code.Levels
             GameObject playerPosition = _player.ParentVisionMesh;
             IVisionMeshGenerator visionCone = _visionConeFactory.CreateVisionMesh(playerPosition, _visionType);
             _player.SetBaseVisionMesh(visionCone);
-            //
-            // _player.transform.DOMovePath(_levelPathMover.Points, _timeLevel,
-            //         PathType.CatmullRom,
-            //         PathMode.Full3D,
-            //         10,
-            //         Color.green)
-            //     .SetOptions(true)
-            //     .SetEase(Ease.Linear)
-            //     .OnComplete(() => Debug.Log("Level Completed!"));
+            
+            _player.transform.DOPath(_levelPathMover.Points.ToArray(), _timeLevel,
+                    PathType.CatmullRom,
+                    PathMode.Full3D,
+                    10,
+                    Color.green)
+                .SetOptions(true)
+                .SetEase(Ease.Linear)
+                .OnComplete(() => Debug.Log("Level Completed!"));
 
         }
     }
