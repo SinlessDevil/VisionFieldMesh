@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1564536677428636741}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.42, y: 0, z: 3.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52,8 +52,8 @@ MonoBehaviour:
   _coneMaterial: {fileID: 2100000, guid: 17eb323d7fdc02b4aba662823b34aed5, type: 2}
   _sortOrder: 1
   _precision: 300
-  _width: 10
-  _height: 10
+  _width: 12
+  _height: 20
   _tiltAngle: 0
   _segments: 64
 --- !u!23 &4008311519226416258

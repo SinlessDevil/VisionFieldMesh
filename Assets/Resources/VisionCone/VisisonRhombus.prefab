@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3863013926719714531}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.066, y: 0, z: 1.467}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51,9 +51,9 @@ MonoBehaviour:
     m_Bits: 55
   _coneMaterial: {fileID: 2100000, guid: 17eb323d7fdc02b4aba662823b34aed5, type: 2}
   _sortOrder: 1
-  _precision: 293
-  _sideLength: 2
-  _angleDegrees: 60
+  _precision: 300
+  _sideLength: 12
+  _angleDegrees: 120
   _segments: 64
 --- !u!23 &1246213605465607168
 MeshRenderer:
