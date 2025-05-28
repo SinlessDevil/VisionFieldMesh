@@ -72,9 +72,6 @@ namespace Code.VisionCone
 
         protected virtual void Update()
         {
-            if (Application.isPlaying)
-                return;
-
             if (!_isInitialized)
                 OnEnable();
 
@@ -90,7 +87,7 @@ namespace Code.VisionCone
 
         protected virtual void OnValidate()
         {
-            if (Application.isPlaying || _meshFilter == null) 
+            if (_meshFilter == null) 
                 return;
             
             GenerateMesh();
