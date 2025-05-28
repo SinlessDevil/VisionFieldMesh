@@ -26,6 +26,7 @@ namespace Code.Infrastructure.Services.GameStater
         private readonly ICameraProvider _cameraProvider;
         private readonly IPlayerProvider _playerProvider;
         private readonly IEnemyProvider _enemiesProvider;
+        private readonly ILevelController _levelController;
         
         private Transform _playerSpawnPoint;
         private List<Transform> _enemySpawnPoints;
@@ -39,7 +40,8 @@ namespace Code.Infrastructure.Services.GameStater
             IEnemyFactory enemyFactory, 
             ICameraProvider cameraProvider, 
             IPlayerProvider playerProvider, 
-            IEnemyProvider enemiesProvider)
+            IEnemyProvider enemiesProvider, 
+            ILevelController levelController)
         {
             _progressService = progressService;
             _saveLoadService = saveLoadService;
@@ -51,6 +53,7 @@ namespace Code.Infrastructure.Services.GameStater
             _cameraProvider = cameraProvider;
             _playerProvider = playerProvider;
             _enemiesProvider = enemiesProvider;
+            _levelController = levelController;
         }
 
         public void Initialize()
@@ -71,12 +74,11 @@ namespace Code.Infrastructure.Services.GameStater
 
         public void Dispose()
         {
-            
-            
             _playerSpawnPoint = null;
             _enemySpawnPoints = null;
             _levelPathMover = null;
             
+            _levelController.Dispose();
             _playerProvider.Dispose();
             _enemiesProvider.Dispose();
         }
@@ -108,12 +110,12 @@ namespace Code.Infrastructure.Services.GameStater
         
         private void InitLevel()
         {
-            var player = InitPlayer();
-            var enemies = InitEnemies();
-            
+            InitPlayer();
+            InitEnemies();
+            InitLevelController();
             Debug.Log("InitLevel");
         }
-
+        
         private List<Enemy> InitEnemies()
         {
             List<Enemy> enemies = _enemySpawnPoints
@@ -131,6 +133,11 @@ namespace Code.Infrastructure.Services.GameStater
             return player;
         }
 
+        private void InitLevelController()
+        {
+            _levelController.SetLevelPathMover(_levelPathMover);
+        }
+        
         private void InitCamera()
         {
             _cameraProvider.SetMainCamera(Camera.main);

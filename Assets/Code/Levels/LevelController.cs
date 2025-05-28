@@ -39,6 +39,11 @@ namespace Code.Levels
             PlayAnimationMovePlayer(timeLevel);
         }
 
+        public void Dispose()
+        {
+            _levelPathMover = null;
+        }
+
         private void SetVisionConeToPlayer(VisionType visionType)
         {
             GameObject playerPosition = _playerProvider.Player.ParentVisionMesh;

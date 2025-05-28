@@ -5,6 +5,7 @@ using Code.Infrastructure.Factory;
 using Code.Infrastructure.Services.PersistenceProgress;
 using Code.Infrastructure.Services.SaveLoad;
 using Code.Infrastructure.Services.StaticData;
+using Code.Levels;
 using Code.Players.Factory;
 using Code.Players.Provider;
 using Code.VisionCone.Factory;
@@ -26,6 +27,7 @@ namespace Code.Infrastructure
             BindSaveLoad();
             BindProgressData();
             BindProvider();
+            BindLevelController();
             BindStaticData();
         }
 
@@ -52,6 +54,11 @@ namespace Code.Infrastructure
         
         private void BindProgressData() =>
             Container.Bind<IPersistenceProgressService>().To<PersistenceProgressService>().AsSingle();
+        
+        private void BindLevelController()
+        {
+            Container.Bind<ILevelController>().To<LevelController>().AsSingle();
+        }
         
         private void BindStaticData()
         {
