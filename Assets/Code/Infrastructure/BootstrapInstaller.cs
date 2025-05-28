@@ -1,10 +1,12 @@
 using Code.Cameras.Provider;
 using Code.Enemies.Factory;
+using Code.Enemies.Provider;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.Services.PersistenceProgress;
 using Code.Infrastructure.Services.SaveLoad;
 using Code.Infrastructure.Services.StaticData;
 using Code.Players.Factory;
+using Code.Players.Provider;
 using Code.VisionCone.Factory;
 using Services.PersistenceProgress;
 using UnityEngine.SceneManagement;
@@ -23,7 +25,7 @@ namespace Code.Infrastructure
             BindFactory();
             BindSaveLoad();
             BindProgressData();
-            BindCameraProvider();
+            BindProvider();
             BindStaticData();
         }
 
@@ -41,9 +43,11 @@ namespace Code.Infrastructure
             Container.Bind<ISaveLoadService>().To<PrefsSaveLoadService>().AsSingle();
         }
 
-        private void BindCameraProvider()
+        private void BindProvider()
         {
             Container.Bind<ICameraProvider>().To<CameraProvider>().AsSingle();
+            Container.Bind<IPlayerProvider>().To<PlayerProvider>().AsSingle();
+            Container.Bind<IEnemyProvider>().To<EnemyProvider>().AsSingle();
         }
         
         private void BindProgressData() =>

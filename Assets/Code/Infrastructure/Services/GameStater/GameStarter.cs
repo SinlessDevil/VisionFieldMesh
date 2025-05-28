@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Cameras.Provider;
 using Code.Enemies.Factory;
+using Code.Enemies.Provider;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.Services.PersistenceProgress;
 using Code.Infrastructure.Services.PersistenceProgress.Player;
@@ -9,8 +10,8 @@ using Code.Infrastructure.Services.SaveLoad;
 using Code.Levels;
 using Code.Players;
 using Code.Players.Factory;
+using Code.Players.Provider;
 using Code.VisionCone;
-using Code.VisionCone.Factory;
 using UnityEngine;
 
 namespace Code.Infrastructure.Services.GameStater
@@ -22,12 +23,13 @@ namespace Code.Infrastructure.Services.GameStater
         private readonly IUIFactory _uiFactory;
         private readonly IPlayerFactory _playerFactory;
         private readonly IEnemyFactory _enemyFactory;
-        private readonly IVisionConeFactory _visionConeFactory;
         private readonly ICameraProvider _cameraProvider;
+        private readonly IPlayerProvider _playerProvider;
+        private readonly IEnemyProvider _enemiesProvider;
         
         private Transform _playerSpawnPoint;
         private List<Transform> _enemySpawnPoints;
-        private LevelController _levelViewController;
+        private LevelPathMover _levelPathMover;
 
         public GameStarter(
             IPersistenceProgressService progressService,
@@ -35,16 +37,20 @@ namespace Code.Infrastructure.Services.GameStater
             IUIFactory uiFactory, 
             IPlayerFactory playerFactory, 
             IEnemyFactory enemyFactory, 
-            IVisionConeFactory visionConeFactory, 
-            ICameraProvider cameraProvider)
+            ICameraProvider cameraProvider, 
+            IPlayerProvider playerProvider, 
+            IEnemyProvider enemiesProvider)
         {
             _progressService = progressService;
             _saveLoadService = saveLoadService;
+            
             _uiFactory = uiFactory;
             _playerFactory = playerFactory;
             _enemyFactory = enemyFactory;
-            _visionConeFactory = visionConeFactory;
+            
             _cameraProvider = cameraProvider;
+            _playerProvider = playerProvider;
+            _enemiesProvider = enemiesProvider;
         }
 
         public void Initialize()
@@ -57,26 +63,22 @@ namespace Code.Infrastructure.Services.GameStater
             InitLevel();
         }
 
-        public void SetPlayerSpawnPoint(Transform playerSpawnPoint)
-        {
-            _playerSpawnPoint = playerSpawnPoint;
-        }
+        public void SetPlayerSpawnPoint(Transform playerSpawnPoint) => _playerSpawnPoint = playerSpawnPoint;
 
-        public void SetEnemySpawnPoints(List<Transform> enemySpawnPoints)
-        {
-            _enemySpawnPoints = enemySpawnPoints;
-        }
+        public void SetEnemySpawnPoints(List<Transform> enemySpawnPoints) => _enemySpawnPoints = enemySpawnPoints;
 
-        public void SetLevelController(LevelController levelViewController)
-        {
-            _levelViewController = levelViewController;
-        }
+        public void SetLevelPathMover(LevelPathMover levelPathMover) => _levelPathMover = levelPathMover;
 
         public void Dispose()
         {
+            
+            
             _playerSpawnPoint = null;
             _enemySpawnPoints = null;
-            _levelViewController = null;
+            _levelPathMover = null;
+            
+            _playerProvider.Dispose();
+            _enemiesProvider.Dispose();
         }
         
         private void InitProgress()
@@ -93,14 +95,12 @@ namespace Code.Infrastructure.Services.GameStater
         private PlayerData LoadProgress()
         {
             Debug.Log("LoadProgress");
-
             return _saveLoadService.Load();
         }
 
         private PlayerData SetUpBaseProgress()
         {
             Debug.Log("InitializeProgress");
-            
             var progress = new PlayerData();
             _progressService.PlayerData = progress;
             return progress;
@@ -110,8 +110,6 @@ namespace Code.Infrastructure.Services.GameStater
         {
             var player = InitPlayer();
             var enemies = InitEnemies();
-         
-            _levelViewController.Initialize(player, enemies, _visionConeFactory);
             
             Debug.Log("InitLevel");
         }
@@ -122,12 +120,14 @@ namespace Code.Infrastructure.Services.GameStater
                 .Select(enemySpawnPoint => _enemyFactory
                     .CreateEnemy(enemySpawnPoint.position))
                 .ToList();
+            _enemiesProvider.SetEnemies(enemies);
             return enemies;
         }
 
         private Player InitPlayer()
         {
             Player player = _playerFactory.CreatePlayer(_playerSpawnPoint.position, new VisionArrowMesh());
+            _playerProvider.SetPlayer(player);
             return player;
         }
 

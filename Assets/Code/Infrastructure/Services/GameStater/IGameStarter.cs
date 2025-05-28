@@ -9,7 +9,7 @@ namespace Code.Infrastructure.Services.GameStater
         void Initialize();
         void SetPlayerSpawnPoint(Transform playerSpawnPoint);
         void SetEnemySpawnPoints(List<Transform> enemySpawnPoints);
-        void SetLevelController(LevelController levelViewController);
+        void SetLevelPathMover(LevelPathMover levelPathMover);
         void Dispose();
     }
 }

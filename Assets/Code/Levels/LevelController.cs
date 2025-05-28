@@ -1,54 +1,54 @@
 using System.Collections.Generic;
+using Code.Enemies.Provider;
 using UnityEngine;
 using Code.Players;
+using Code.Players.Provider;
 using Code.VisionCone;
 using Code.VisionCone.Factory;
 using DG.Tweening;
-using Sirenix.OdinInspector;
 
 namespace Code.Levels
 {
-    public class LevelController : MonoBehaviour
+    public class LevelController : ILevelController
     {
-        [Header("Level Components")]
-        [SerializeField] private LevelPathMover _levelPathMover;
+        private readonly IPlayerProvider _playerProvider;
+        private readonly IEnemyProvider _enemiesProvider;
+        private readonly IVisionConeFactory _visionConeFactory;
         
-        [Space(20)] [Header("Start Game")]
-        [SerializeField] private VisionType _visionType;
-        [SerializeField] private float _timeLevel = 30f;
-        
-        private Player _player;
-        private List<Enemy> _enemies;
-        private IVisionConeFactory _visionConeFactory;
+        private LevelPathMover _levelPathMover;
 
-        public void Initialize(
-            Player player, 
-            List<Enemy> enemies,
+        public LevelController(
+            IPlayerProvider playerProvider,
+            IEnemyProvider enemiesProvider,
             IVisionConeFactory visionConeFactory)
         {
-            _player = player;
-            _enemies = enemies;
+            _playerProvider = playerProvider;
+            _enemiesProvider = enemiesProvider;
             _visionConeFactory = visionConeFactory;
         }
         
-        [Button]
-        public void PlayLevel()
+        public void SetLevelPathMover(LevelPathMover levelPathMover)
         {
-            SetVisionConeToPlayer();
-
-            PlayAnimationMovePlayer();
-        }
-
-        private void SetVisionConeToPlayer()
-        {
-            GameObject playerPosition = _player.ParentVisionMesh;
-            IVisionMeshGenerator visionCone = _visionConeFactory.CreateVisionMesh(playerPosition, _visionType);
-            _player.SetBaseVisionMesh(visionCone);
+            _levelPathMover = levelPathMover;
         }
         
-        private void PlayAnimationMovePlayer()
+        public void OnPlayLevel(VisionType visionType, float timeLevel)
         {
-            _player.transform.DOPath(GetPath(), _timeLevel,
+            SetVisionConeToPlayer(visionType);
+
+            PlayAnimationMovePlayer(timeLevel);
+        }
+
+        private void SetVisionConeToPlayer(VisionType visionType)
+        {
+            GameObject playerPosition = _playerProvider.Player.ParentVisionMesh;
+            IVisionMeshGenerator visionCone = _visionConeFactory.CreateVisionMesh(playerPosition, visionType);
+            _playerProvider.Player.SetBaseVisionMesh(visionCone);
+        }
+        
+        private void PlayAnimationMovePlayer(float timeLevel)
+        {
+            Player.transform.DOPath(GetPath(), timeLevel,
                     PathType.CatmullRom,
                     PathMode.Full3D,
                     10,
@@ -64,5 +64,7 @@ namespace Code.Levels
             path.Reverse();
             return path.ToArray();
         }
+        
+        private Player Player => _playerProvider.Player;
     }
 }
