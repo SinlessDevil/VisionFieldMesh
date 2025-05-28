@@ -5,7 +5,7 @@ using Code.Players;
 using Code.Players.Provider;
 using Code.VisionCone;
 using Code.VisionCone.Factory;
-using DG.Tweening;
+using Cysharp.Threading.Tasks;
 
 namespace Code.Levels
 {
@@ -51,16 +51,11 @@ namespace Code.Levels
             _playerProvider.Player.SetBaseVisionMesh(visionCone);
         }
         
-        private void PlayAnimationMovePlayer(float timeLevel)
+        private async UniTask PlayAnimationMovePlayer(float speed)
         {
-            Player.transform.DOPath(GetPath(), timeLevel,
-                    PathType.CatmullRom,
-                    PathMode.Full3D,
-                    10,
-                    Color.green)
-                .SetOptions(true)
-                .SetEase(Ease.Linear)
-                .OnComplete(() => Debug.Log("Level Completed!"));
+            await Player.PlayerMover.MoveAlongPath(speed,GetPath());
+            
+            Debug.Log("Player Completed Path");
         }
         
         private Vector3[] GetPath()
