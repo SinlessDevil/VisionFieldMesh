@@ -15,8 +15,7 @@ namespace Code.VisionCone.Factory
         public IVisionMeshGenerator CreateVisionMesh(GameObject parent, VisionType visionType)
         {
             string path = VisionConePrefabsPath + visionType;
-            GameObject gameObject = Instantiate(path, Vector3.zero, Quaternion.identity, parent.transform);
-            gameObject.transform.position = Vector3.zero;
+            GameObject gameObject = Instantiate(path, parent.transform.position, Quaternion.identity, parent.transform);
             IVisionMeshGenerator visionCone = gameObject.GetComponent<IVisionMeshGenerator>();
             return visionCone;
         }
