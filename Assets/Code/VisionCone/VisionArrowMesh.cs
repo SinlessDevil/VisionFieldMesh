@@ -8,6 +8,7 @@ namespace Code.VisionCone
         [SerializeField] private float _height = 2f;
         [SerializeField, Range(-45, 45)] private float _tiltAngle = 0f;
         [SerializeField, Range(4, 256)] private int _segments = 64;
+        [SerializeField, Min(0f)] private float _raycastOffset = 0.05f;
 
         private float _lastWidth;
         private float _lastHeight;
@@ -45,7 +46,7 @@ namespace Code.VisionCone
 
                 if (Physics.Raycast(origin, dir, out RaycastHit hit, dist, _obstacleMask))
                 {
-                    edgeWorld = hit.point;
+                    edgeWorld = hit.point - dir * _raycastOffset;
                 }
 
                 Vector3 localPoint = inverse * (edgeWorld - origin);
@@ -79,10 +80,10 @@ namespace Code.VisionCone
 
             return total switch
             {
-                < 1f => Vector3.Lerp(new Vector3(-halfWidth, 0, -0f), new Vector3(halfWidth, 0, 0f), total),             // нижняя сторона
-                < 2f => Vector3.Lerp(new Vector3(halfWidth, 0, 0f), new Vector3(0f, 0, halfHeight), total - 1f),         // правая вверх
-                < 3f => Vector3.Lerp(new Vector3(0f, 0, halfHeight), new Vector3(-halfWidth, 0, 0f), total - 2f),        // верх влево
-                _    => Vector3.Lerp(new Vector3(-halfWidth, 0, 0f), new Vector3(-halfWidth, 0, -0f), total - 3f)        // левая вниз
+                < 1f => Vector3.Lerp(new Vector3(-halfWidth, 0, -0f), new Vector3(halfWidth, 0, 0f), total),
+                < 2f => Vector3.Lerp(new Vector3(halfWidth, 0, 0f), new Vector3(0f, 0, halfHeight), total - 1f),
+                < 3f => Vector3.Lerp(new Vector3(0f, 0, halfHeight), new Vector3(-halfWidth, 0, 0f), total - 2f),
+                _    => Vector3.Lerp(new Vector3(-halfWidth, 0, 0f), new Vector3(-halfWidth, 0, -0f), total - 3f)
             };
         }
 
@@ -126,9 +127,10 @@ namespace Code.VisionCone
 
                 if (Physics.Raycast(origin, dir, out RaycastHit hit, dist, _obstacleMask))
                 {
+                    Vector3 hitOffset = hit.point - dir * _raycastOffset;
                     Gizmos.color = Color.red;
-                    Gizmos.DrawLine(origin, hit.point);
-                    Gizmos.DrawSphere(hit.point, 0.025f);
+                    Gizmos.DrawLine(origin, hitOffset);
+                    Gizmos.DrawSphere(hitOffset, 0.025f);
                 }
                 else
                 {
