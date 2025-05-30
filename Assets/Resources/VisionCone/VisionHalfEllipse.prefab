@@ -58,6 +58,7 @@ MonoBehaviour:
   _centerOffset: {x: 0, y: 0, z: 0}
   _preLength: 10
   _length: 2
+  _raycastOffset: 0.5
 --- !u!23 &4844346728855639717
 MeshRenderer:
   m_ObjectHideFlags: 0

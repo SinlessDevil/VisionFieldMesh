@@ -10,6 +10,7 @@ namespace Code.VisionCone
         [SerializeField] private int _segments = 64;
         [Header("Center Offset (local)")]
         [SerializeField] private Vector3 _centerOffset = new(0f, 0f, -2f);
+        [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
 
         private float _lastWidth;
         private float _lastHeight;
@@ -43,8 +44,10 @@ namespace Code.VisionCone
 
                 if (Physics.Raycast(origin, dir, out RaycastHit hit, maxDist, _obstacleMask))
                 {
-                    Vector3 localHit = inverseRotation * (hit.point - transform.position);
-                    _vertices.Add(localHit);
+                    float adjustedDist = Mathf.Max(0f, hit.distance - _raycastOffset);
+                    Vector3 adjustedPoint = origin + dir * adjustedDist;
+                    Vector3 localAdjusted = inverseRotation * (adjustedPoint - transform.position);
+                    _vertices.Add(localAdjusted);
                 }
                 else
                 {
