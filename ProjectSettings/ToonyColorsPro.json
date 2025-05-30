@@ -6,10 +6,12 @@
     "CustomOutputPath": "/JMO Assets/Toony Colors Pro/Shaders Generated/",
     "LastImplementationExportImportPath": "E:/Unity/Projects/VisionFieldMesh/Assets",
     "OpenedFoldouts": [],
-    "UseCustomFont": false,
+    "UseCustomFont": true,
     "CustomFont": {
-        "instanceID": 0
+        "fileID": 12800000,
+        "guid": "8a406076b7de34849be1f35585875a66",
+        "type": 3
     },
-    "CustomFontInitialized": false,
+    "CustomFontInitialized": true,
     "Upgrade_Hybrid1toHybrid2_Done": true
 }
