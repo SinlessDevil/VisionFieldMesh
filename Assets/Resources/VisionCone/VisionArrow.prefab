@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3992218412652331835}
   - component: {fileID: 4050206963418688641}
-  - component: {fileID: 4008311519226416258}
-  - component: {fileID: 7922431933070331525}
+  - component: {fileID: 1165256890763123035}
+  - component: {fileID: 5929368034712204901}
   m_Layer: 0
   m_Name: VisionArrow
   m_TagString: Untagged
@@ -57,7 +57,15 @@ MonoBehaviour:
   _tiltAngle: 0
   _segments: 64
   _raycastOffset: 0.05
---- !u!23 &4008311519226416258
+--- !u!33 &1165256890763123035
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564536677428636741}
+  m_Mesh: {fileID: 0}
+--- !u!23 &5929368034712204901
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,11 +107,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &7922431933070331525
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1564536677428636741}
-  m_Mesh: {fileID: 0}

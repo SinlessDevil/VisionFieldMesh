@@ -14,7 +14,7 @@ namespace Code.VisionCone
         private float _lastHeight;
         private int _lastSegments;
 
-        protected override string MeshName => "VisionSquareMesh";
+        public override string MeshName => "VisionSquareMesh";
 
         protected override void GenerateMesh()
         {

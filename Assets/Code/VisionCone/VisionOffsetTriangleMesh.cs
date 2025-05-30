@@ -17,7 +17,7 @@ namespace Code.VisionCone
         private int _lastSegments;
         private Vector3 _lastOffset;
 
-        protected override string MeshName => "VisionOffsetTriangleMesh";
+        public override string MeshName => "VisionOffsetTriangleMesh";
 
         protected override void GenerateMesh()
         {

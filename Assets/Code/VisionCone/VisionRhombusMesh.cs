@@ -12,7 +12,7 @@ namespace Code.VisionCone
         private float _lastSideLength;
         private int _lastSegments;
 
-        protected override string MeshName => "VisionRhombusMesh";
+        public override string MeshName => "VisionRhombusMesh";
 
         protected override void GenerateMesh()
         {

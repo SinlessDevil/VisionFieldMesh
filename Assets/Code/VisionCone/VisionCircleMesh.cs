@@ -11,7 +11,7 @@ namespace Code.VisionCone
         
         private Vector3[] _precomputedDirs;
 
-        protected override string MeshName => "VisionCircleMesh";
+        public override string MeshName => "VisionCircleMesh";
 
         protected override void GenerateMesh()
         {

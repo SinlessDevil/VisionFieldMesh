@@ -30,7 +30,7 @@ namespace Code.VisionCone
         protected readonly List<Vector3> _normals = new();
         protected readonly List<Vector2> _uv = new();
 
-        protected virtual string MeshName => "VisionMesh";
+        public virtual string MeshName => "VisionMesh";
 
         protected virtual void OnEnable()
         {
@@ -51,8 +51,18 @@ namespace Code.VisionCone
                 return;
             }
 
+            if (_meshRenderer == null)
+            {
+                _meshRenderer = GetComponent<MeshRenderer>();
+                if (_meshRenderer == null)
+                    _meshRenderer = gameObject.AddComponent<MeshRenderer>();
+            }
+            
             if (_coneMaterial != null)
+            {
                 _meshRenderer.sharedMaterial = _coneMaterial;
+            }
+
 
             _meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             _meshRenderer.receiveShadows = false;
@@ -104,5 +114,41 @@ namespace Code.VisionCone
         }
 
         protected abstract void GenerateMesh();
+        
+        [ContextMenu("Generate or Update Mesh")]
+        public void GenerateOrUpdateMesh()
+        {
+            // 🔧 Обеспечить, что MeshFilter есть
+            if (_meshFilter == null)
+            {
+                _meshFilter = GetComponent<MeshFilter>();
+                if (_meshFilter == null)
+                    _meshFilter = gameObject.AddComponent<MeshFilter>();
+            }
+
+            // 🔧 Обеспечить, что MeshRenderer есть
+            if (_meshRenderer == null)
+            {
+                _meshRenderer = GetComponent<MeshRenderer>();
+                if (_meshRenderer == null)
+                    _meshRenderer = gameObject.AddComponent<MeshRenderer>();
+            }
+
+            // 🔄 Пересоздание меша, если его нет или имя не совпадает
+            if (_meshFilter.sharedMesh == null || _meshFilter.sharedMesh.name != MeshName)
+            {
+                _meshFilter.sharedMesh = new Mesh { name = MeshName };
+                _meshFilter.sharedMesh.MarkDynamic();
+            }
+
+            GenerateMesh();
+            CacheParams();
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(gameObject.scene);
+#endif
+        }
+
     }
 }

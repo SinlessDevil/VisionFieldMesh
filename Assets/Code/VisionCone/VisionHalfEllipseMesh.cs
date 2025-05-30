@@ -19,7 +19,7 @@ namespace Code.VisionCone
         private int _lastSegments;
         private Vector3 _lastOffset;
 
-        protected override string MeshName => "VisionHalfEllipseMesh";
+        public override string MeshName => "VisionHalfEllipseMesh";
 
         protected override void GenerateMesh()
         {
