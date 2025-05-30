@@ -8,6 +8,7 @@ namespace Code.VisionCone
         [SerializeField] private float _width = 2f;
         [SerializeField] private float _height = 2f;
         [SerializeField] private int _segments = 64;
+        [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
 
         private float _lastWidth;
         private float _lastHeight;
@@ -41,7 +42,8 @@ namespace Code.VisionCone
 
                 if (Physics.Raycast(origin, dir, out RaycastHit hit, dist, _obstacleMask))
                 {
-                    edgeWorld = hit.point;
+                    float adjustedDist = Mathf.Max(0f, hit.distance - _raycastOffset);
+                    edgeWorld = origin + dir * adjustedDist;
                 }
 
                 Vector3 localPoint = inverse * (edgeWorld - origin);
@@ -117,9 +119,11 @@ namespace Code.VisionCone
 
                 if (Physics.Raycast(origin, dir, out RaycastHit hit, dist, _obstacleMask))
                 {
+                    float adjustedDist = Mathf.Max(0f, hit.distance - _raycastOffset);
+                    Vector3 adjustedPoint = origin + dir * adjustedDist;
                     Gizmos.color = Color.red;
-                    Gizmos.DrawLine(origin, hit.point);
-                    Gizmos.DrawSphere(hit.point, 0.025f);
+                    Gizmos.DrawLine(origin, adjustedPoint);
+                    Gizmos.DrawSphere(adjustedPoint, 0.025f);
                 }
                 else
                 {
