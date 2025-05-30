@@ -7,6 +7,7 @@ namespace Code.VisionCone
     {
         [SerializeField] protected float _visionAngle = 360f;
         [SerializeField] protected float _visionRange = 1f;
+        [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
         
         private Vector3[] _precomputedDirs;
 
@@ -38,7 +39,7 @@ namespace Code.VisionCone
 
                 if (Physics.Raycast(origin, worldDir, out RaycastHit hit, _visionRange, _obstacleMask))
                 {
-                    distance = hit.distance;
+                    distance = Mathf.Max(0f, hit.distance - _raycastOffset);
                 }
 
                 Vector3 worldPoint = origin + worldDir * distance;
@@ -124,11 +125,12 @@ namespace Code.VisionCone
 
                 Vector3 dirLocal = new Vector3(cos, 0f, sin);
                 Vector3 dirWorld = rotation * dirLocal;
-
+                
                 if (Physics.Raycast(origin, dirWorld, out RaycastHit hit, _visionRange, _obstacleMask.value))
                 {
+                    float adjustedDistance = Mathf.Max(0f, hit.distance - _raycastOffset);
                     Gizmos.color = Color.red;
-                    Gizmos.DrawLine(origin, origin + dirWorld * hit.distance);
+                    Gizmos.DrawLine(origin, origin + dirWorld * adjustedDistance);
                 }
                 else
                 {
