@@ -118,23 +118,20 @@ namespace Code.VisionCone
         [ContextMenu("Generate or Update Mesh")]
         public void GenerateOrUpdateMesh()
         {
-            // 🔧 Обеспечить, что MeshFilter есть
             if (_meshFilter == null)
             {
                 _meshFilter = GetComponent<MeshFilter>();
                 if (_meshFilter == null)
                     _meshFilter = gameObject.AddComponent<MeshFilter>();
             }
-
-            // 🔧 Обеспечить, что MeshRenderer есть
+            
             if (_meshRenderer == null)
             {
                 _meshRenderer = GetComponent<MeshRenderer>();
                 if (_meshRenderer == null)
                     _meshRenderer = gameObject.AddComponent<MeshRenderer>();
             }
-
-            // 🔄 Пересоздание меша, если его нет или имя не совпадает
+            
             if (_meshFilter.sharedMesh == null || _meshFilter.sharedMesh.name != MeshName)
             {
                 _meshFilter.sharedMesh = new Mesh { name = MeshName };
