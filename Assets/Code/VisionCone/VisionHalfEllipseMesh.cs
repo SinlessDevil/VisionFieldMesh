@@ -98,7 +98,7 @@ namespace Code.VisionCone
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-            if (!enabled || _segments < 2)
+            if (!enabled || _segments < 2 || HasInitMesh())
                 return;
 
             Vector3 origin = transform.position + transform.rotation * _centerOffset;
