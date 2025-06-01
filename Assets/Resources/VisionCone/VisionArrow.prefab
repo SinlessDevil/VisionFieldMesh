@@ -46,9 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0b102bcf8c4d1993fb907838a20436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _meshRenderer: {fileID: 5929368034712204901}
+  _meshFilter: {fileID: 1165256890763123035}
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 55
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   _coneMaterial: {fileID: 2100000, guid: 17eb323d7fdc02b4aba662823b34aed5, type: 2}
   _sortOrder: 1
   _precision: 300

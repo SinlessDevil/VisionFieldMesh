@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6406893710322832938}
   - component: {fileID: 6554416381303616564}
-  - component: {fileID: 4844346728855639717}
-  - component: {fileID: 284708241073410877}
+  - component: {fileID: 8689378116795887755}
+  - component: {fileID: 883009166102459634}
   m_Layer: 0
   m_Name: VisionHalfEllipse
   m_TagString: Untagged
@@ -46,7 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71fe509fb3ad4629b10d149557477a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _meshRenderer: {fileID: 8689378116795887755}
+  _meshFilter: {fileID: 883009166102459634}
   _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 55
+  _targetMask:
     serializedVersion: 2
     m_Bits: 55
   _coneMaterial: {fileID: 2100000, guid: 17eb323d7fdc02b4aba662823b34aed5, type: 2}
@@ -59,7 +64,7 @@ MonoBehaviour:
   _preLength: 10
   _length: 2
   _raycastOffset: 0.5
---- !u!23 &4844346728855639717
+--- !u!23 &8689378116795887755
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +106,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &284708241073410877
+--- !u!33 &883009166102459634
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Code.VisionCone
@@ -6,63 +7,47 @@ namespace Code.VisionCone
     [ExecuteAlways]
     public abstract class BaseVisionMesh : MonoBehaviour, IVisionMeshGenerator
     {
-        [Header("Vision")]
-        [SerializeField] protected LayerMask _obstacleMask = ~0;
-        [Header("Material")]
-        [SerializeField] protected Material _coneMaterial;
-        [SerializeField] protected int _sortOrder = 1;
-        [Header("Optimization")]
-        [SerializeField] protected int _precision = 300;
-
-        private MeshRenderer _meshRenderer;
-        protected MeshFilter _meshFilter;
-
-        private bool _isInitialized;
+        [BoxGroup("Base Vision Settings")] [SerializeField] protected MeshRenderer _meshRenderer;
+        [BoxGroup("Base Vision Settings")] [SerializeField] protected MeshFilter _meshFilter;
+        [BoxGroup("Base Vision Settings")] [SerializeField] protected LayerMask _obstacleMask = ~0;
+        [BoxGroup("Base Vision Settings")] [SerializeField] protected LayerMask _targetMask = ~0;
+        [BoxGroup("Base Vision Settings")] [SerializeField] protected Material _coneMaterial;
+        [BoxGroup("Base Vision Settings")] [SerializeField] protected int _sortOrder = 1;
+        [BoxGroup("Base Vision Settings")] [SerializeField] protected int _precision = 300;
 
         protected float _lastAngle;
         protected float _lastRange;
         protected int _lastPrecision;
-        private Vector3 _lastPosition;
-        private Quaternion _lastRotation;
+        protected Vector3 _lastPosition;
+        protected Quaternion _lastRotation;
 
         protected readonly List<Vector3> _vertices = new();
         protected readonly List<int> _triangles = new();
         protected readonly List<Vector3> _normals = new();
         protected readonly List<Vector2> _uv = new();
-
+        
         public virtual string MeshName => "VisionMesh";
-
-        protected virtual void OnEnable()
+        
+        protected abstract void GenerateMesh();
+        
+        protected virtual void InitMesh()
         {
-            if (_isInitialized)
-                return;
-
             _meshRenderer = GetComponent<MeshRenderer>();
             if (_meshRenderer == null)
             {
                 _meshRenderer = gameObject.AddComponent<MeshRenderer>();
-                return;
             }
 
             _meshFilter = GetComponent<MeshFilter>();
             if (_meshFilter == null)
             {
                 _meshFilter = gameObject.AddComponent<MeshFilter>();
-                return;
-            }
-
-            if (_meshRenderer == null)
-            {
-                _meshRenderer = GetComponent<MeshRenderer>();
-                if (_meshRenderer == null)
-                    _meshRenderer = gameObject.AddComponent<MeshRenderer>();
             }
             
             if (_coneMaterial != null)
             {
                 _meshRenderer.sharedMaterial = _coneMaterial;
             }
-
 
             _meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             _meshRenderer.receiveShadows = false;
@@ -76,16 +61,11 @@ namespace Code.VisionCone
                 _meshFilter.sharedMesh = new Mesh { name = MeshName };
                 _meshFilter.sharedMesh.MarkDynamic();
             }
-
-            _isInitialized = true;
         }
-
+        
         protected virtual void Update()
         {
-            if (!_isInitialized)
-                OnEnable();
-
-            if (_meshFilter == null || _meshFilter.sharedMesh == null)
+            if (HasInitMesh())
                 return;
 
             if (!ParamsChanged())
@@ -95,15 +75,12 @@ namespace Code.VisionCone
             CacheParams();
         }
 
-        protected virtual void OnValidate()
-        {
-            if (_meshFilter == null) 
-                return;
-            
-            GenerateMesh();
-        }
-        
-        protected virtual bool ParamsChanged() =>
+        protected virtual bool HasInitMesh() => 
+            _meshFilter == null || 
+            _meshFilter.sharedMesh == null || 
+            _meshRenderer == null;
+
+        protected virtual bool ParamsChanged() => 
             _lastPosition != transform.position ||
             _lastRotation != transform.rotation;
 
@@ -112,34 +89,35 @@ namespace Code.VisionCone
             _lastPosition = transform.position;
             _lastRotation = transform.rotation;
         }
-
-        protected abstract void GenerateMesh();
         
-        [ContextMenu("Generate or Update Mesh")]
-        public void GenerateOrUpdateMesh()
+        protected virtual void CleanLists()
         {
-            if (_meshFilter == null)
+            _vertices.Clear();
+            _triangles.Clear();
+            _normals.Clear();
+            _uv.Clear();
+        }
+        
+        private void CleanMesh()
+        {
+            if (_meshRenderer != null)
+                DestroyImmediate(_meshRenderer);
+            if (_meshFilter != null)
+                DestroyImmediate(_meshFilter);
+        }
+        
+        [Button(ButtonSizes.Large)]
+        [GUIColor(0.2f, 0.85f, 0.2f)] 
+        public void CreateMesh()
+        {
+            if (!HasInitMesh())
             {
-                _meshFilter = GetComponent<MeshFilter>();
-                if (_meshFilter == null)
-                    _meshFilter = gameObject.AddComponent<MeshFilter>();
+                Debug.Log("Mesh is Initialized!");
+                return;
             }
             
-            if (_meshRenderer == null)
-            {
-                _meshRenderer = GetComponent<MeshRenderer>();
-                if (_meshRenderer == null)
-                    _meshRenderer = gameObject.AddComponent<MeshRenderer>();
-            }
-            
-            if (_meshFilter.sharedMesh == null || _meshFilter.sharedMesh.name != MeshName)
-            {
-                _meshFilter.sharedMesh = new Mesh { name = MeshName };
-                _meshFilter.sharedMesh.MarkDynamic();
-            }
-
+            InitMesh();
             GenerateMesh();
-            CacheParams();
 
 #if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(this);
@@ -147,5 +125,13 @@ namespace Code.VisionCone
 #endif
         }
 
+        [Button(ButtonSizes.Large)]
+        [GUIColor(0.9f, 0.3f, 0.3f)] 
+        public void DeleteMesh()
+        {
+            CleanMesh();
+            CleanLists();
+            CacheParams();
+        }
     }
 }
