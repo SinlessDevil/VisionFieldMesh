@@ -1,18 +1,18 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Code.VisionCone
 {
     public class VisionHalfEllipseMesh : BaseVisionMesh
     {
-        [Header("Square Settings")]
-        [SerializeField] private float _width = 4f;
-        [SerializeField] private float _height = 4f;
-        [SerializeField] private int _segments = 64;
-        [Header("Center Offset (local)")]
-        [SerializeField] private Vector3 _centerOffset = new(0f, 0f, -2f);
-        [SerializeField] private float _preLength = 1.5f;
-        [SerializeField] private float _length = 2f;
-        [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _width = 4f;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _height = 4f;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private int _segments = 64;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")]
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private Vector3 _centerOffset = new(0f, 0f, -2f);
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _preLength = 1.5f;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _length = 2f;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
         
         private float _lastWidth;
         private float _lastHeight;
