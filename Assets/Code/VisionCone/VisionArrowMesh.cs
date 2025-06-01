@@ -1,14 +1,15 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Code.VisionCone
 {
     public class VisionArrowMesh : BaseVisionMesh
     {
-        [SerializeField] private float _width = 2f;
-        [SerializeField] private float _height = 2f;
-        [SerializeField, Range(-45, 45)] private float _tiltAngle = 0f;
-        [SerializeField, Range(4, 256)] private int _segments = 64;
-        [SerializeField, Min(0f)] private float _raycastOffset = 0.05f;
+        [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField] private float _width = 2f;
+        [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField] private float _height = 2f;
+        [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField, Range(-45, 45)] private float _tiltAngle = 0f;
+        [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField, Range(4, 256)] private int _segments = 64;
+        [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.05f;
 
         private float _lastWidth;
         private float _lastHeight;
@@ -87,7 +88,7 @@ namespace Code.VisionCone
             };
         }
 
-        protected override bool ParamsChanged() =>
+        protected override bool ParamsChanged() => 
             _lastWidth != _width ||
             _lastHeight != _height ||
             _lastTilt != _tiltAngle ||
@@ -106,7 +107,7 @@ namespace Code.VisionCone
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-            if (!enabled || _segments < 4) 
+            if (!enabled || _segments < 4 || HasInitMesh()) 
                 return;
 
             Vector3 origin = transform.position;

@@ -46,7 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef93165c15b84da2ab9a215aa9b36ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _meshRenderer: {fileID: 3744352867359957189}
+  _meshFilter: {fileID: 4906744467717991761}
   _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 55
+  _targetMask:
     serializedVersion: 2
     m_Bits: 55
   _coneMaterial: {fileID: 2100000, guid: 17eb323d7fdc02b4aba662823b34aed5, type: 2}
@@ -56,6 +61,7 @@ MonoBehaviour:
   _height: 10
   _segments: 32
   _centerOffset: {x: 0, y: 0, z: 0}
+  _raycastOffset: 0.5
 --- !u!23 &3744352867359957189
 MeshRenderer:
   m_ObjectHideFlags: 0

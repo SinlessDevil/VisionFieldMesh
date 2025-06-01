@@ -53,7 +53,7 @@ MonoBehaviour:
     m_Bits: 55
   _targetMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   _coneMaterial: {fileID: 2100000, guid: 17eb323d7fdc02b4aba662823b34aed5, type: 2}
   _sortOrder: 1
   _precision: 300

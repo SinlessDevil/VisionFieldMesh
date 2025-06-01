@@ -1,14 +1,14 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Code.VisionCone
 {
     public class VisionSquareMesh : BaseVisionMesh
     {
-        [Header("Square Settings")]
-        [SerializeField] private float _width = 2f;
-        [SerializeField] private float _height = 2f;
-        [SerializeField] private int _segments = 64;
-        [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
+        [BoxGroup("Vision Square Mesh Settings")] [SerializeField] private float _width = 2f;
+        [BoxGroup("Vision Square Mesh Settings")] [SerializeField] private float _height = 2f;
+        [BoxGroup("Vision Square Mesh Settings")] [SerializeField] private int _segments = 64;
+        [BoxGroup("Vision Square Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
 
         private float _lastWidth;
         private float _lastHeight;
@@ -88,7 +88,7 @@ namespace Code.VisionCone
             };
         }
 
-        protected override bool ParamsChanged() =>
+        protected override bool ParamsChanged() => 
             _lastWidth != _width ||
             _lastHeight != _height ||
             _lastSegments != _segments ||
@@ -106,6 +106,9 @@ namespace Code.VisionCone
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
+            if (!enabled || _segments < 2 || HasInitMesh())
+                return;
+            
             Vector3 origin = transform.position;
 
             for (int i = 0; i < _segments; i++)

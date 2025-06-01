@@ -1,13 +1,14 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Code.VisionCone
 {
     public class VisionRhombusMesh : BaseVisionMesh
     {
-        [SerializeField] private float _sideLength = 2f;
-        [SerializeField, Range(10f, 170f)] private float _angleDegrees = 60f;
-        [SerializeField, Range(4, 256)] private int _segments = 64;
-        [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
+        [BoxGroup("Vision Rhombus Mesh Settings")] [SerializeField] private float _sideLength = 2f;
+        [BoxGroup("Vision Rhombus Mesh Settings")] [SerializeField, Range(10f, 170f)] private float _angleDegrees = 60f;
+        [BoxGroup("Vision Rhombus Mesh Settings")] [SerializeField, Range(4, 256)] private int _segments = 64;
+        [BoxGroup("Vision Rhombus Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
 
         private float _lastSideLength;
         private int _lastSegments;
@@ -86,7 +87,7 @@ namespace Code.VisionCone
             };
         }
         
-        protected override bool ParamsChanged() =>
+        protected override bool ParamsChanged() => 
             _lastSideLength != _sideLength || 
             _lastAngle != _angleDegrees || 
             _lastSegments != _segments || 
@@ -103,7 +104,7 @@ namespace Code.VisionCone
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-            if (!enabled || _segments < 4) 
+            if (!enabled || _segments < 4 || HasInitMesh()) 
                 return;
 
             Vector3 origin = transform.position;

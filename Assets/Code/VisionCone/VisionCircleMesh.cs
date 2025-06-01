@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Code.VisionCone
 {
     public class VisionCircleMesh : BaseVisionMesh
     {
-        [SerializeField] protected float _visionAngle = 360f;
-        [SerializeField] protected float _visionRange = 1f;
-        [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
+        [BoxGroup("Vision Circle Mesh Settings")] [SerializeField] protected float _visionAngle = 360f;
+        [BoxGroup("Vision Circle Mesh Settings")] [SerializeField] protected float _visionRange = 1f;
+        [BoxGroup("Vision Circle Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
         
         private Vector3[] _precomputedDirs;
 
@@ -79,7 +80,7 @@ namespace Code.VisionCone
             mesh.SetUVs(0, _uv);
         }
         
-        protected override bool ParamsChanged() =>
+        protected override bool ParamsChanged() => 
             !Mathf.Approximately(_lastAngle, _visionAngle) ||
             !Mathf.Approximately(_lastRange, _visionRange) ||
             _lastPrecision != _precision ||
@@ -111,6 +112,9 @@ namespace Code.VisionCone
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
+            if (!enabled || HasInitMesh()) 
+                return;
+            
             Vector3 origin = transform.position;
             Quaternion rotation = transform.rotation;
 
