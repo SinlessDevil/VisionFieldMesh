@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3992218412652331835}
   - component: {fileID: 4050206963418688641}
-  - component: {fileID: 1165256890763123035}
-  - component: {fileID: 5929368034712204901}
+  - component: {fileID: 807124777414652525}
+  - component: {fileID: 3886996347500768357}
   m_Layer: 0
   m_Name: VisionArrow
   m_TagString: Untagged
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0b102bcf8c4d1993fb907838a20436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshRenderer: {fileID: 5929368034712204901}
-  _meshFilter: {fileID: 1165256890763123035}
+  _meshRenderer: {fileID: 807124777414652525}
+  _meshFilter: {fileID: 3886996347500768357}
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 55
@@ -62,15 +62,7 @@ MonoBehaviour:
   _tiltAngle: 0
   _segments: 64
   _raycastOffset: 0.05
---- !u!33 &1165256890763123035
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1564536677428636741}
-  m_Mesh: {fileID: 0}
---- !u!23 &5929368034712204901
+--- !u!23 &807124777414652525
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,3 +104,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &3886996347500768357
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564536677428636741}
+  m_Mesh: {fileID: 0}

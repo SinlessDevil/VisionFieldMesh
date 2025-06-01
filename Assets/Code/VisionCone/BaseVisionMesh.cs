@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -27,6 +28,15 @@ namespace Code.VisionCone
         protected readonly List<Vector2> _uv = new();
         
         public virtual string MeshName => "VisionMesh";
+
+        protected virtual void Awake()
+        {
+            if (_meshFilter.sharedMesh == null || _meshFilter.sharedMesh.name != MeshName)
+            {
+                _meshFilter.sharedMesh = new Mesh { name = MeshName };
+                _meshFilter.sharedMesh.MarkDynamic();
+            }
+        }
         
         protected abstract void GenerateMesh();
         
