@@ -189,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parentVisionMesh: {fileID: 3427659935629417650}
   _playerMover: {fileID: 9155031019575577565}
+  _visionAI: {fileID: 6761367527941960050}
 --- !u!114 &9155031019575577565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b967ea8116203f9478c0ae07d566178d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detector: {fileID: 0}
 --- !u!1 &8576145157714640572
 GameObject:
   m_ObjectHideFlags: 0

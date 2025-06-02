@@ -40,6 +40,7 @@ namespace Code.VisionCone.Detectors
                 if (!col.TryGetComponent(out Enemy enemy))
                     continue;
 
+                Debug.Log(col.gameObject.name);
                 Vector3 dir = enemy.transform.position - _body.position;
                 float angle = Vector3.Angle(_body.forward, new Vector3(dir.x, 0, dir.z));
                 float height = enemy.transform.position.y - _body.position.y;

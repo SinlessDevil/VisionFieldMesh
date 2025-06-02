@@ -16,6 +16,9 @@ namespace Code.Players
         {
             if(_playerMover == null)
                 _playerMover = GetComponent<PlayerMover>();
+            
+            if(_visionAI == null)
+                _visionAI = GetComponent<VisionAI>();
         }
 
         public GameObject ParentVisionMesh => _parentVisionMesh;
