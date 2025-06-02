@@ -6,6 +6,6 @@ namespace Code.Players.Factory
 {
     public interface IPlayerFactory
     {
-        Player CreatePlayer(Vector3 position, BaseVisionMesh baseVisionMesh);
+        Player CreatePlayer(Vector3 position);
     }
 }

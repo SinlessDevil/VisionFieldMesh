@@ -10,7 +10,6 @@ namespace Code.VisionCone.Visions
         [BoxGroup("Base Vision Settings")] [SerializeField] protected MeshRenderer _meshRenderer;
         [BoxGroup("Base Vision Settings")] [SerializeField] protected MeshFilter _meshFilter;
         [BoxGroup("Base Vision Settings")] [SerializeField] protected LayerMask _obstacleMask = ~0;
-        [BoxGroup("Base Vision Settings")] [SerializeField] protected LayerMask _targetMask = ~0;
         [BoxGroup("Base Vision Settings")] [SerializeField] protected Material _coneMaterial;
         [BoxGroup("Base Vision Settings")] [SerializeField] protected int _sortOrder = 1;
         [BoxGroup("Base Vision Settings")] [SerializeField] protected int _precision = 300;

@@ -145,7 +145,7 @@ namespace Code.Infrastructure.Services.GameStater
 
         private Player InitPlayer()
         {
-            Player player = _playerFactory.CreatePlayer(_playerSpawnPoint.position, new VisionArrowMesh());
+            Player player = _playerFactory.CreatePlayer(_playerSpawnPoint.position);
             _playerProvider.SetPlayer(player);
             return player;
         }

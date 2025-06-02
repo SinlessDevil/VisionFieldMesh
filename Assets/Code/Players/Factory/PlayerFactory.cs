@@ -14,12 +14,11 @@ namespace Code.Players.Factory
             
         }
 
-        public Player CreatePlayer(Vector3 position, BaseVisionMesh baseVisionMesh)
+        public Player CreatePlayer(Vector3 position)
         {
             var gameObject = Instantiate(PlayerPrefabPath, position, Quaternion.identity, null);
             var player = gameObject.GetComponent<Player>();
             player.transform.position = position;
-            player.SetBaseTargetDetector(baseVisionMesh);
             return player;
         }
     }   
