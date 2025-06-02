@@ -1,5 +1,6 @@
 using System;
 using Code.VisionCone;
+using Code.VisionCone.Visions;
 using UnityEngine;
 
 namespace Code.Players
@@ -9,7 +10,7 @@ namespace Code.Players
         [SerializeField] private GameObject _parentVisionMesh;
         [SerializeField] private PlayerMover _playerMover;
         
-        private IVisionMeshGenerator _visionMeshGenerator;
+        private BaseVisionMesh _visionMeshGenerator;
 
         private void OnValidate()
         {
@@ -21,7 +22,7 @@ namespace Code.Players
         
         public PlayerMover PlayerMover => _playerMover;
         
-        public void SetBaseVisionMesh(IVisionMeshGenerator visionMeshGenerator)
+        public void SetBaseVisionMesh(BaseVisionMesh visionMeshGenerator)
         {
             _visionMeshGenerator = visionMeshGenerator;
         }

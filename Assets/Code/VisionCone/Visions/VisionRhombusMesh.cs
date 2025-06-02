@@ -1,22 +1,19 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Code.VisionCone
+namespace Code.VisionCone.Visions
 {
-    public class VisionArrowMesh : BaseVisionMesh
+    public class VisionRhombusMesh : BaseVisionMesh
     {
-        [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField] private float _width = 2f;
-        [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField] private float _height = 2f;
-        [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField, Range(-45, 45)] private float _tiltAngle = 0f;
-        [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField, Range(4, 256)] private int _segments = 64;
-        [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.05f;
+        [BoxGroup("Vision Rhombus Mesh Settings")] [SerializeField] private float _sideLength = 2f;
+        [BoxGroup("Vision Rhombus Mesh Settings")] [SerializeField, Range(10f, 170f)] private float _angleDegrees = 60f;
+        [BoxGroup("Vision Rhombus Mesh Settings")] [SerializeField, Range(4, 256)] private int _segments = 64;
+        [BoxGroup("Vision Rhombus Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
 
-        private float _lastWidth;
-        private float _lastHeight;
-        private float _lastTilt;
+        private float _lastSideLength;
         private int _lastSegments;
 
-        public override string MeshName => "VisionArrowMesh";
+        public override string MeshName => "VisionRhombusMesh";
 
         protected override void GenerateMesh()
         {
@@ -33,13 +30,14 @@ namespace Code.VisionCone
             _normals.Add(Vector3.up);
             _uv.Add(Vector2.zero);
 
-            float halfWidth = _width / 2f;
-            float halfHeight = _height / 2f;
-            
+            float angleRad = _angleDegrees * Mathf.Deg2Rad;
+            float halfDiagH = Mathf.Cos(angleRad / 2f) * _sideLength;
+            float halfDiagV = Mathf.Sin(angleRad / 2f) * _sideLength;
+
             for (int i = 0; i < _segments; i++)
             {
                 float t = i / (float)_segments;
-                Vector3 edgeLocal = GetPointOnRhombusEdge(t, halfWidth, halfHeight);
+                Vector3 edgeLocal = GetPointOnRhombusEdge(t, halfDiagH, halfDiagV);
                 Vector3 edgeWorld = transform.TransformPoint(edgeLocal);
 
                 Vector3 dir = (edgeWorld - origin).normalized;
@@ -47,7 +45,8 @@ namespace Code.VisionCone
 
                 if (Physics.Raycast(origin, dir, out RaycastHit hit, dist, _obstacleMask))
                 {
-                    edgeWorld = hit.point - dir * _raycastOffset;
+                    float adjustedDist = Mathf.Max(0f, hit.distance - _raycastOffset);
+                    edgeWorld = origin + dir * adjustedDist;
                 }
 
                 Vector3 localPoint = inverse * (edgeWorld - origin);
@@ -75,31 +74,29 @@ namespace Code.VisionCone
             mesh.SetUVs(0, _uv);
         }
 
-        private Vector3 GetPointOnRhombusEdge(float t, float halfWidth, float halfHeight)
+        private Vector3 GetPointOnRhombusEdge(float t, float halfDiagH, float halfDiagV)
         {
             float total = t * 4f;
 
             return total switch
             {
-                < 1f => Vector3.Lerp(new Vector3(-halfWidth, 0, -0f), new Vector3(halfWidth, 0, 0f), total),
-                < 2f => Vector3.Lerp(new Vector3(halfWidth, 0, 0f), new Vector3(0f, 0, halfHeight), total - 1f),
-                < 3f => Vector3.Lerp(new Vector3(0f, 0, halfHeight), new Vector3(-halfWidth, 0, 0f), total - 2f),
-                _    => Vector3.Lerp(new Vector3(-halfWidth, 0, 0f), new Vector3(-halfWidth, 0, -0f), total - 3f)
+                < 1f => Vector3.Lerp(new Vector3(0, 0, -halfDiagV), new Vector3(halfDiagH, 0, 0), total),
+                < 2f => Vector3.Lerp(new Vector3(halfDiagH, 0, 0), new Vector3(0, 0, halfDiagV), total - 1f),
+                < 3f => Vector3.Lerp(new Vector3(0, 0, halfDiagV), new Vector3(-halfDiagH, 0, 0), total - 2f),
+                _    => Vector3.Lerp(new Vector3(-halfDiagH, 0, 0), new Vector3(0, 0, -halfDiagV), total - 3f),
             };
         }
-
+        
         protected override bool ParamsChanged() => 
-            _lastWidth != _width ||
-            _lastHeight != _height ||
-            _lastTilt != _tiltAngle ||
-            _lastSegments != _segments ||
+            _lastSideLength != _sideLength || 
+            _lastAngle != _angleDegrees || 
+            _lastSegments != _segments || 
             base.ParamsChanged();
 
         protected override void CacheParams()
         {
-            _lastWidth = _width;
-            _lastHeight = _height;
-            _lastTilt = _tiltAngle;
+            _lastSideLength = _sideLength;
+            _lastAngle = _angleDegrees;
             _lastSegments = _segments;
             base.CacheParams();
         }
@@ -111,27 +108,27 @@ namespace Code.VisionCone
                 return;
 
             Vector3 origin = transform.position;
-            Quaternion tilt = Quaternion.Euler(0f, _tiltAngle, 0f);
 
-            float halfWidth = _width / 2f;
-            float halfHeight = _height / 2f;
+            float angleRad = _angleDegrees * Mathf.Deg2Rad;
+            float halfDiagH = Mathf.Cos(angleRad / 2f) * _sideLength;
+            float halfDiagV = Mathf.Sin(angleRad / 2f) * _sideLength;
 
-            for (int i = 0; i < _segments; i++)
+            for (int i = 0; i <= _segments; i++)
             {
                 float t = i / (float)_segments;
-                Vector3 edgeLocal = GetPointOnRhombusEdge(t, halfWidth, halfHeight);
-                Vector3 rotated = tilt * edgeLocal;
-                Vector3 edgeWorld = transform.TransformPoint(rotated);
+                Vector3 edgeLocal = GetPointOnRhombusEdge(t, halfDiagH, halfDiagV);
+                Vector3 edgeWorld = transform.TransformPoint(edgeLocal);
                 Vector3 dir = edgeWorld - origin;
                 float dist = dir.magnitude;
                 dir.Normalize();
 
                 if (Physics.Raycast(origin, dir, out RaycastHit hit, dist, _obstacleMask))
                 {
-                    Vector3 hitOffset = hit.point - dir * _raycastOffset;
+                    float adjustedDist = Mathf.Max(0f, hit.distance - _raycastOffset);
+                    Vector3 adjustedPoint = origin + dir * adjustedDist;
                     Gizmos.color = Color.red;
-                    Gizmos.DrawLine(origin, hitOffset);
-                    Gizmos.DrawSphere(hitOffset, 0.025f);
+                    Gizmos.DrawLine(origin, adjustedPoint);
+                    Gizmos.DrawSphere(adjustedPoint, 0.025f);
                 }
                 else
                 {

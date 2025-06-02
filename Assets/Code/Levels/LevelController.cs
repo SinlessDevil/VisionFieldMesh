@@ -5,6 +5,7 @@ using Code.Players;
 using Code.Players.Provider;
 using Code.VisionCone;
 using Code.VisionCone.Factory;
+using Code.VisionCone.Visions;
 using Cysharp.Threading.Tasks;
 
 namespace Code.Levels
@@ -47,7 +48,7 @@ namespace Code.Levels
         private void SetVisionConeToPlayer(VisionType visionType)
         {
             GameObject playerPosition = _playerProvider.Player.ParentVisionMesh;
-            IVisionMeshGenerator visionCone = _visionConeFactory.CreateVisionMesh(playerPosition, visionType);
+            BaseVisionMesh visionCone = _visionConeFactory.CreateVisionMesh(playerPosition, visionType);
             _playerProvider.Player.SetBaseVisionMesh(visionCone);
         }
         

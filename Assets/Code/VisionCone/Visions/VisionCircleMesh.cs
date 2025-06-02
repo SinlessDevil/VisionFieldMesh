@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Code.VisionCone
+namespace Code.VisionCone.Visions
 {
     public class VisionCircleMesh : BaseVisionMesh
     {

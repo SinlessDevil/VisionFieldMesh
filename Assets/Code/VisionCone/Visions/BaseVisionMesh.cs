@@ -1,12 +1,11 @@
-using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Code.VisionCone
+namespace Code.VisionCone.Visions
 {
     [ExecuteAlways]
-    public abstract class BaseVisionMesh : MonoBehaviour, IVisionMeshGenerator
+    public abstract class BaseVisionMesh : MonoBehaviour
     {
         [BoxGroup("Base Vision Settings")] [SerializeField] protected MeshRenderer _meshRenderer;
         [BoxGroup("Base Vision Settings")] [SerializeField] protected MeshFilter _meshFilter;
