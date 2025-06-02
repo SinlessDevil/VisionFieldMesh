@@ -13,6 +13,7 @@ using Code.Players.Factory;
 using Code.Players.Provider;
 using Code.UI.Levels;
 using Code.VisionCone;
+using Code.VisionCone.Visions;
 using UnityEngine;
 
 namespace Code.Infrastructure.Services.GameStater

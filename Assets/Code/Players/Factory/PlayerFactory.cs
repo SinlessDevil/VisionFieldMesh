@@ -1,5 +1,6 @@
 using Zenject;
 using Code.VisionCone;
+using Code.VisionCone.Visions;
 using UnityEngine;
 
 namespace Code.Players.Factory
