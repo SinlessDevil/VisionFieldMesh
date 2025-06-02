@@ -3,7 +3,7 @@ using Code.Enemies.Provider;
 using UnityEngine;
 using Code.Players;
 using Code.Players.Provider;
-using Code.VisionCone;
+using Code.VisionCone.Detectors;
 using Code.VisionCone.Factory;
 using Code.VisionCone.Visions;
 using Cysharp.Threading.Tasks;
@@ -49,7 +49,8 @@ namespace Code.Levels
         {
             GameObject playerPosition = _playerProvider.Player.ParentVisionMesh;
             BaseVisionMesh visionCone = _visionConeFactory.CreateVisionMesh(playerPosition, visionType);
-            _playerProvider.Player.SetBaseVisionMesh(visionCone);
+            BaseTargetDetector baseTargetDetector = visionCone.GetComponent<BaseTargetDetector>();
+            _playerProvider.Player.SetBaseTargetDetector(baseTargetDetector);
         }
         
         private async UniTask PlayAnimationMovePlayer(float speed)

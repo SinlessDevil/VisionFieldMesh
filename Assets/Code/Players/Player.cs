@@ -1,5 +1,6 @@
 using System;
 using Code.VisionCone;
+using Code.VisionCone.Detectors;
 using Code.VisionCone.Visions;
 using UnityEngine;
 
@@ -9,8 +10,7 @@ namespace Code.Players
     {
         [SerializeField] private GameObject _parentVisionMesh;
         [SerializeField] private PlayerMover _playerMover;
-        
-        private BaseVisionMesh _visionMeshGenerator;
+        [SerializeField] private VisionAI _visionAI;
 
         private void OnValidate()
         {
@@ -22,9 +22,14 @@ namespace Code.Players
         
         public PlayerMover PlayerMover => _playerMover;
         
-        public void SetBaseVisionMesh(BaseVisionMesh visionMeshGenerator)
+        public void SetBaseTargetDetector(BaseTargetDetector baseTargetDetector)
         {
-            _visionMeshGenerator = visionMeshGenerator;
+            _visionAI.Initialize(baseTargetDetector);
+        }
+
+        public void Dispose()
+        {
+            _visionAI.Dispose();
         }
     }    
 }

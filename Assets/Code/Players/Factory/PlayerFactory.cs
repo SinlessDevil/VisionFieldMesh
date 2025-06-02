@@ -19,7 +19,7 @@ namespace Code.Players.Factory
             var gameObject = Instantiate(PlayerPrefabPath, position, Quaternion.identity, null);
             var player = gameObject.GetComponent<Player>();
             player.transform.position = position;
-            player.SetBaseVisionMesh(baseVisionMesh);
+            player.SetBaseTargetDetector(baseVisionMesh);
             return player;
         }
     }   
