@@ -5,15 +5,30 @@ namespace Code.VisionCone.Visions
 {
     public class VisionHalfEllipseMesh : BaseVisionMesh
     {
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _width = 4f;
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _height = 4f;
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private int _segments = 64;
-        [BoxGroup("Vision Half Ellipse Mesh Settings")]
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private Vector3 _centerOffset = new(0f, 0f, -2f);
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _preLength = 1.5f;
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _length = 2f;
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
-        
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
+        private float _width = 4f;
+
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
+        private float _height = 4f;
+
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
+        private int _segments = 64;
+
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
+        private Vector3 _centerOffset = new(0f, 0f, -2f);
+
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
+        private float _preLength = 1.5f;
+
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
+        private float _length = 2f;
+
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField, Min(0f)]
+        private float _raycastOffset = 0.5f;
+
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [Space(10)] [SerializeField]
+        private bool _isShowDebug = true;
+
         private float _lastWidth;
         private float _lastHeight;
         private int _lastSegments;
@@ -39,7 +54,7 @@ namespace Code.VisionCone.Visions
             {
                 float t = i / (float)_segments;
                 float localX = Mathf.Lerp(-_width / 2f, _width / 2f, t);
-                
+
                 float centerOffset = Mathf.Abs(t - 0.5f) * _length;
                 centerOffset = Mathf.Clamp01(centerOffset);
                 float curve = Mathf.Sin((1f - centerOffset) * Mathf.PI * 0.5f);
@@ -78,7 +93,7 @@ namespace Code.VisionCone.Visions
             mesh.SetNormals(_normals);
             mesh.SetUVs(0, _uv);
         }
-        
+
         protected override bool ParamsChanged() =>
             _lastWidth != _width ||
             _lastHeight != _height ||
@@ -98,6 +113,9 @@ namespace Code.VisionCone.Visions
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
+            if (!_isShowDebug)
+                return;
+
             if (!enabled || _segments < 2 || HasInitMesh())
                 return;
 
@@ -107,7 +125,7 @@ namespace Code.VisionCone.Visions
             {
                 float t = i / (float)_segments;
                 float localX = Mathf.Lerp(-_width / 2f, _width / 2f, t);
-                
+
                 float centerOffset = Mathf.Abs(t - 0.5f) * _length;
                 centerOffset = Mathf.Clamp01(centerOffset);
                 float curve = Mathf.Sin((1f - centerOffset) * Mathf.PI * 0.5f);
