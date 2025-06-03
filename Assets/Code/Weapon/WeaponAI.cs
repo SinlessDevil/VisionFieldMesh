@@ -57,12 +57,38 @@ namespace Code.Weapon
         {
             Quaternion targetRot = Quaternion.Euler(WeaponIdleRotation);
             await RotateTo(_weapon.Pivot.transform, targetRot, 0.25f);
+            _weapon.Play();
         }
 
         private async UniTask FollowToTargetState(CancellationToken token)
         {
+            _weapon.Stop();
+            
             Quaternion targetRot = Quaternion.Euler(WeaponAimRotation);
             await RotateTo(_weapon.Pivot.transform, targetRot, 0.25f, token);
+            
+            while (_currentTarget != null && !token.IsCancellationRequested)
+            {
+                Vector3 toTarget = _currentTarget.transform.position - _weapon.Pivot.transform.position;
+                toTarget.y = 0f;
+                if (toTarget == Vector3.zero)
+                {
+                    await UniTask.Yield(token);
+                    continue;
+                }
+
+                Quaternion lookRot = Quaternion.LookRotation(toTarget.normalized);
+                Vector3 euler = lookRot.eulerAngles;
+                
+                Quaternion finalRot = Quaternion.Euler(0, euler.y, 0);
+                _weapon.Pivot.transform.rotation = Quaternion.Slerp(
+                    _weapon.Pivot.transform.rotation,
+                    finalRot,
+                    Time.deltaTime * 5f
+                );
+
+                await UniTask.Yield(token);
+            }
         }
 
         private async UniTask ShootTargetState(CancellationToken token)
