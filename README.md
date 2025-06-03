@@ -2,23 +2,24 @@
 
 ## 🔍 Overview
 
-**VisionFieldSystem** — модульная и гибкая система обзора (FOV) для Unity, включающая визуализацию зоны видимости и обнаружение целей с учётом препятствий. Поддерживает разные формы обзора и настраивается через инспектор.
+**VisionFieldSystem** — is a modular and flexible field of view (FOV) system for Unity that combines visual cone rendering with target detection, taking obstacles into account.
+It supports various vision shapes and is fully configurable through the Inspector.
 
-Подходит для врагов, турелей, NPC, охранников и любых AI-систем восприятия.
+Perfect for enemies, turrets, NPCs, guards, and any AI perception systems.
 
 
 ## 📽️ Demo Preview
 
 | Type             | Mesh + Detector Pair                                   | Preview                                                |
 |------------------|--------------------------------------------------------|--------------------------------------------------------|
-| **Circle**       | `VisionFieldMesh` + `TargetFieldDetector`             | ![](https://github.com/user-attachments/assets/c0864105-69f8-498b-9de5-39c403db2e54) |
-| **Arrow**        | `VisionArrowMesh` + `TargetArrowDetector`             | ![](https://github.com/user-attachments/assets/3f6d499e-c2e4-4b62-b511-3e272ae8206d) |
-| **Half Ellipse** | `VisionHalfEllipseMesh` + `TargetHalfEllipseDetector` | ![](https://github.com/user-attachments/assets/8ce44c5d-a9ee-48d7-9dfa-58d729b61d30) |
-| **Triangle**     | `VisionOffsetTriangleMesh` + `TargetOffsetTriangleDetector` | ![](https://github.com/user-attachments/assets/891876e5-8b9b-4720-b407-1e030d66192f) |
-| **Square**       | `VisionSquareMesh` + `TargetSquareDetector`           | ![](https://github.com/user-attachments/assets/5a57c130-37a7-4c5e-9add-12e90ee40af6) |
-| **Rhombus**      | `VisionRhombusMesh` + `TargetRhombusDetector`         | ![](https://github.com/user-attachments/assets/e03875ed-f6a6-4724-a7a3-da4cb4524cde) |
+| **Circle**       | `VisionFieldMesh` + `TargetFieldDetector`             | ![](https://github.com/user-attachments/assets/1f34bb28-ebc9-4d96-980d-25c04aa4ec32) |
+| **Arrow**        | `VisionArrowMesh` + `TargetArrowDetector`             | ![](https://github.com/user-attachments/assets/3d156c53-6247-4b12-964c-b37761eb8e22) |
+| **Half Ellipse** | `VisionHalfEllipseMesh` + `TargetHalfEllipseDetector` | ![](https://github.com/user-attachments/assets/7428179c-7076-4655-a80b-7e3c62c0acfc) |
+| **Triangle**     | `VisionOffsetTriangleMesh` + `TargetOffsetTriangleDetector` | ![](https://github.com/user-attachments/assets/14311f6b-3cf5-4a4b-8e3b-7f0ded496cf4) |
+| **Square**       | `VisionSquareMesh` + `TargetSquareDetector`           | ![](https://github.com/user-attachments/assets/209ff446-9c2f-40d1-bcf4-e7555e82b437) |
+| **Rhombus**      | `VisionRhombusMesh` + `TargetRhombusDetector`         | ![](https://github.com/user-attachments/assets/7a5720b7-c31b-47d9-b20e-e50b0fe9806c) |
 
-![image](https://github.com/user-attachments/assets/4acb0538-51d5-40d1-9329-589ddc005b30)
+## 📽️ Videos
 
 https://github.com/user-attachments/assets/c0864105-69f8-498b-9de5-39c403db2e54
 
@@ -35,8 +36,6 @@ https://github.com/user-attachments/assets/8ce44c5d-a9ee-48d7-9dfa-58d729b61d30
 - 🎥 Runtime detection events: `OnTargetDetected`, `OnTargetLost`
 - 🌗 `RaycastOffset` to avoid surface clipping
 - ♻️ Clean modular architecture: easy to extend
-
----
 
 ## 🧰 How to Use
 
