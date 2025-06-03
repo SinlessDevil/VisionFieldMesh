@@ -11,46 +11,40 @@ namespace Code.VisionCone.Detectors
 
         protected override Enemy FindVisibleTarget()
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _height, _targetMask);
-            foreach (var col in colliders)
+            Vector3 origin = _body.position;
+            Quaternion tilt = Quaternion.Euler(0, _tiltAngle, 0);
+
+            int segments = Mathf.Max(8, _precision);
+            Enemy closestEnemy = null;
+            float closestDistance = float.MaxValue;
+
+            for (int i = 0; i <= segments; i += 4)
             {
-                if (!col.TryGetComponent(out Enemy enemy))
-                    continue;
+                float t = i / (float)segments;
+                Vector3 pointLocal = GetPointOnRhombusEdge(t);
+                Vector3 pointWorld = _body.TransformPoint(tilt * pointLocal);
 
-                if (!IsInsideArrow(enemy.transform.position))
-                    continue;
+                Vector3 direction = (pointWorld - origin).normalized;
+                float distance = Vector3.Distance(origin, pointWorld);
 
-                Vector3 dir = (enemy.transform.position - _body.position).normalized;
-                float distance = Vector3.Distance(_body.position, enemy.transform.position);
-
-                if (Physics.Raycast(_body.position, dir, out RaycastHit hit, distance, _obstacleMask))
+                if (Physics.Raycast(origin, direction, out RaycastHit hit, distance, _targetMask))
                 {
-                    if (hit.transform != enemy.transform && !hit.transform.IsChildOf(enemy.transform))
-                        continue;
+                    if (hit.collider.TryGetComponent(out Enemy enemy))
+                    {
+                        if (distance < closestDistance)
+                        {
+                            if (!Physics.Raycast(origin, direction, out RaycastHit blockHit, distance, _obstacleMask) ||
+                                blockHit.transform == enemy.transform || blockHit.transform.IsChildOf(enemy.transform))
+                            {
+                                closestEnemy = enemy;
+                                closestDistance = distance;
+                            }
+                        }
+                    }
                 }
-
-                return enemy;
             }
 
-            return null;
-        }
-
-        private bool IsInsideArrow(Vector3 targetWorldPos)
-        {
-            Vector3 local = Quaternion.Inverse(Quaternion.Euler(0, _tiltAngle, 0)) * (_body.InverseTransformPoint(targetWorldPos));
-            float x = local.x;
-            float z = local.z;
-
-            float halfW = _width / 2f;
-            float halfH = _height / 2f;
-
-            if (z < 0 || z > _height)
-                return false;
-
-            float normalizedZ = z / _height;
-            float currentHalfWidth = Mathf.Lerp(halfW, 0, Mathf.Abs(0.5f - normalizedZ) * 2f);
-
-            return Mathf.Abs(x) <= currentHalfWidth;
+            return closestEnemy;
         }
 
 #if UNITY_EDITOR
@@ -63,8 +57,6 @@ namespace Code.VisionCone.Detectors
             Quaternion tilt = Quaternion.Euler(0, _tiltAngle, 0);
 
             Gizmos.color = Color.yellow;
-
-            // Отрисовка стрелки (по периметру)
             int segments = Mathf.Max(8, _precision);
             Vector3 prevPoint = origin;
 
@@ -80,7 +72,6 @@ namespace Code.VisionCone.Detectors
                 prevPoint = pointWorld;
             }
 
-            // Промежуточные лучи с цветами
             for (int i = 0; i <= segments; i += 4)
             {
                 float t = i / (float)segments;
@@ -107,20 +98,6 @@ namespace Code.VisionCone.Detectors
                     Gizmos.color = color;
                     Gizmos.DrawLine(origin, pointWorld);
                 }
-            }
-
-            // Подсветка целей
-            Collider[] colliders = Physics.OverlapSphere(origin, _height, _targetMask);
-            foreach (var col in colliders)
-            {
-                if (!col.TryGetComponent(out Enemy enemy))
-                    continue;
-
-                if (!IsInsideArrow(enemy.transform.position))
-                    continue;
-
-                Gizmos.color = Color.cyan;
-                Gizmos.DrawWireSphere(enemy.transform.position, 0.3f);
             }
         }
 
