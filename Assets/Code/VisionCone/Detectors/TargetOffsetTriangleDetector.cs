@@ -69,13 +69,17 @@ namespace Code.VisionCone.Detectors
 
                 if (Physics.Raycast(origin, dir, out RaycastHit hit, distance, _obstacleMask | _targetMask))
                 {
+                    float adjustedDistance = Mathf.Max(0f, hit.distance - _raycastOffset);
+                    Vector3 adjustedPoint = origin + dir * adjustedDistance;
+
                     if (hit.collider.TryGetComponent(out Enemy _))
                         color = Color.yellow;
                     else
                         color = Color.red;
 
                     Gizmos.color = color;
-                    Gizmos.DrawLine(origin, hit.point);
+                    Gizmos.DrawLine(origin, adjustedPoint);
+                    Gizmos.DrawSphere(adjustedPoint, 0.025f);
                 }
                 else
                 {
@@ -85,5 +89,6 @@ namespace Code.VisionCone.Detectors
             }
         }
 #endif
+
     }
 }
