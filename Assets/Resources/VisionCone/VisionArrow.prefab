@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3992218412652331835}
   - component: {fileID: 4050206963418688641}
+  - component: {fileID: -1787179872096853048}
   - component: {fileID: 807124777414652525}
   - component: {fileID: 3886996347500768357}
   m_Layer: 0
@@ -51,9 +52,6 @@ MonoBehaviour:
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 55
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 55
   _coneMaterial: {fileID: 2100000, guid: 17eb323d7fdc02b4aba662823b34aed5, type: 2}
   _sortOrder: 1
   _precision: 300
@@ -62,6 +60,31 @@ MonoBehaviour:
   _tiltAngle: 0
   _segments: 64
   _raycastOffset: 0.05
+  _isShowDebug: 0
+--- !u!114 &-1787179872096853048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564536677428636741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a889a689d784fc7b5afdf02e71d64a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 55
+  _body: {fileID: 3992218412652331835}
+  _isShowDebug: 1
+  _precision: 256
+  _width: 12
+  _height: 20
+  _tiltAngle: 0
 --- !u!23 &807124777414652525
 MeshRenderer:
   m_ObjectHideFlags: 0

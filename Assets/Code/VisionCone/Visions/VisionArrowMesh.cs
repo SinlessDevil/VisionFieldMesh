@@ -10,7 +10,8 @@ namespace Code.VisionCone.Visions
         [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField, Range(-45, 45)] private float _tiltAngle = 0f;
         [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField, Range(4, 256)] private int _segments = 64;
         [BoxGroup("Vision Arrow Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.05f;
-
+        [BoxGroup("Vision Arrow Mesh Settings")] [Space(10)] [SerializeField] private bool _isShowDebug = true;
+        
         private float _lastWidth;
         private float _lastHeight;
         private float _lastTilt;
@@ -107,6 +108,9 @@ namespace Code.VisionCone.Visions
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
+            if(!_isShowDebug)
+                return;
+            
             if (!enabled || _segments < 4 || HasInitMesh()) 
                 return;
 
