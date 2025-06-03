@@ -58,6 +58,7 @@ MonoBehaviour:
   _visionAngle: 360
   _visionRange: 6
   _raycastOffset: 0.5
+  _isShowDebug: 0
 --- !u!114 &120456186138581444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +82,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   _body: {fileID: 3572078882463218989}
+  _isShowDebug: 1
 --- !u!23 &8702533720111472176
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Code.VisionCone.Detectors
@@ -67,12 +66,9 @@ namespace Code.VisionCone.Detectors
 
         private void OnDrawGizmosSelected()
         {
-            if(!_isShowDebug)
+            if (!_isShowDebug || !_body)
                 return;
-            
-            if (!_body)
-                return;
-            
+
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, _range);
 
@@ -81,7 +77,7 @@ namespace Code.VisionCone.Detectors
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(_body.position, _body.position + left * _range);
             Gizmos.DrawLine(_body.position, _body.position + right * _range);
-            
+
             Collider[] colliders = Physics.OverlapSphere(transform.position, _range, _targetMask);
             foreach (var col in colliders)
             {
@@ -89,24 +85,25 @@ namespace Code.VisionCone.Detectors
                     continue;
 
                 Vector3 dir = enemy.transform.position - _body.position;
-                float angle = Vector3.Angle(_body.forward, new Vector3(dir.x, 0, dir.z));
+                Vector3 flatDir = new Vector3(dir.x, 0f, dir.z);
+                float angle = Vector3.Angle(_body.forward, flatDir);
+                float distance = flatDir.magnitude;
                 float height = enemy.transform.position.y - _body.position.y;
 
                 bool inCone = angle < _viewAngle / 2f &&
-                              dir.magnitude < _range &&
+                              distance < _range &&
                               height < _heightAbove && height > -_heightBelow;
 
-                Vector3 rayDir = (enemy.transform.position - _body.position).normalized;
-                float distance = Vector3.Distance(_body.position, enemy.transform.position);
-                
                 Color color = Color.gray;
+
                 if (inCone)
                 {
+                    Vector3 rayDir = flatDir.normalized;
                     if (Physics.Raycast(_body.position, rayDir, out RaycastHit hit, distance, _obstacleMask))
                     {
                         if (hit.transform == enemy.transform || hit.transform.IsChildOf(enemy.transform))
                         {
-                            color = Color.green; 
+                            color = Color.green;
                         }
                         else
                         {
@@ -124,5 +121,6 @@ namespace Code.VisionCone.Detectors
                 Gizmos.DrawWireSphere(enemy.transform.position, 0.2f);
             }
         }
+
     }
 }

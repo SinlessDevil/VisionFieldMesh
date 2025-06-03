@@ -6,9 +6,10 @@ namespace Code.VisionCone.Visions
 {
     public class VisionCircleMesh : BaseVisionMesh
     {
-        [BoxGroup("Vision Circle Mesh Settings")] [SerializeField] protected float _visionAngle = 360f;
-        [BoxGroup("Vision Circle Mesh Settings")] [SerializeField] protected float _visionRange = 1f;
+        [BoxGroup("Vision Circle Mesh Settings")] [SerializeField] private float _visionAngle = 360f;
+        [BoxGroup("Vision Circle Mesh Settings")] [SerializeField] private float _visionRange = 1f;
         [BoxGroup("Vision Circle Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
+        [BoxGroup("Vision Circle Mesh Settings")] [Space(5)] [SerializeField] private bool _isShowDebug = true; 
         
         private Vector3[] _precomputedDirs;
 
@@ -112,6 +113,9 @@ namespace Code.VisionCone.Visions
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
+            if(!_isShowDebug)
+                return;
+            
             if (!enabled || HasInitMesh()) 
                 return;
             
