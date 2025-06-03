@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Code.VisionCone.Detectors
 {
@@ -20,6 +19,7 @@ namespace Code.VisionCone.Detectors
         private void Update()
         {
             Enemy target = FindVisibleTarget();
+
             if (target != _lastTarget)
             {
                 if (_lastTarget != null)
@@ -40,20 +40,18 @@ namespace Code.VisionCone.Detectors
                 if (!col.TryGetComponent(out Enemy enemy))
                     continue;
 
-                Debug.Log(col.gameObject.name);
                 Vector3 dir = enemy.transform.position - _body.position;
-                float angle = Vector3.Angle(_body.forward, new Vector3(dir.x, 0, dir.z));
+                
+                Vector3 flatDir = new Vector3(dir.x, 0f, dir.z);
+                float angle = Vector3.Angle(_body.forward, flatDir);
+                float distance = flatDir.magnitude;
+                
                 float height = enemy.transform.position.y - _body.position.y;
-
-                bool inCone = angle < _viewAngle / 2f &&
-                              dir.magnitude < _range &&
-                              height < _heightAbove && height > -_heightBelow;
-
-                if (!inCone)
+                if (angle > _viewAngle / 2f || distance > _range || height > _heightAbove || height < -_heightBelow)
                     continue;
-
-                if (Physics.Raycast(_body.position, dir.normalized, out RaycastHit hit, dir.magnitude,
-                        _obstacleMask))
+                
+                Vector3 rayDir = flatDir.normalized;
+                if (Physics.Raycast(_body.position, rayDir, out RaycastHit hit, distance, _obstacleMask))
                 {
                     if (hit.transform != enemy.transform && !hit.transform.IsChildOf(enemy.transform))
                         continue;
