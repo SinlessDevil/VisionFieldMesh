@@ -25,12 +25,12 @@ namespace Code.VisionCone
 
         private void HandleTargetDetected(Enemy enemy)
         {
-            Debug.Log($"Враг обнаружен: {enemy.name}");
+            Debug.Log($"Enemy detected {enemy.name}");
         }
 
         private void HandleTargetLost(Enemy enemy)
         {
-            Debug.Log($"Враг потерян из виду: {enemy.name}");
+            Debug.Log($"Enemy missing {enemy.name}");
         }
     }   
 }
