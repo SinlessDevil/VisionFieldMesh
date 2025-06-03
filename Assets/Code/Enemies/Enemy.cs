@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+namespace Code
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Enemy : MonoBehaviour
     {
+        [SerializeField] private Collider _collider;
+        [SerializeField] private MeshRenderer _meshRenderer;
+        [SerializeField] private ParticleSystem _particleSystem;
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        public void SetRevive()
+        {
+            _particleSystem.Stop();
+            _collider.enabled = true;
+            _meshRenderer.enabled = true;
+        }
         
+        public void SetDead()
+        {
+            _particleSystem.Play();
+            _collider.enabled = false;
+            _meshRenderer.enabled = false;
+        }
     }
 }
