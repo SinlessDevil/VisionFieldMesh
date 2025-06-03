@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6047224429630148293}
   - component: {fileID: 1431972504860994345}
+  - component: {fileID: 6889799854076314212}
   - component: {fileID: 3744352867359957189}
   - component: {fileID: 4906744467717991761}
   m_Layer: 0
@@ -51,12 +52,35 @@ MonoBehaviour:
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 55
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 55
   _coneMaterial: {fileID: 2100000, guid: 17eb323d7fdc02b4aba662823b34aed5, type: 2}
   _sortOrder: 1
   _precision: 300
+  _width: 10
+  _height: 10
+  _segments: 32
+  _centerOffset: {x: 0, y: 0, z: 0}
+  _raycastOffset: 0.5
+--- !u!114 &6889799854076314212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421789221289608177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db58105c7a56429583dc1647b63af46c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 55
+  _body: {fileID: 6047224429630148293}
+  _isShowDebug: 1
+  _precision: 64
   _width: 10
   _height: 10
   _segments: 32
