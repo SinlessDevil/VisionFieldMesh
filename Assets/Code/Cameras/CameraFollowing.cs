@@ -5,9 +5,9 @@ namespace Code.Cameras
 {
     public class CameraFollowing
     {
-        private Vector3 _offsetPosition = new(0, 17, -7);
-        private Vector3 _offsetRotation = new(50f, 0, 0);
-        private float _lerpSpeed = 1.5f;
+        private Vector3 _offsetLocal = new(0, 12, -7);
+        private Vector3 _fixedEuler = new(35f, 0, 0);
+        private float _lerpSpeed = 5f;
 
         private Transform _target;
         private ICameraProvider _cameraProvider;
@@ -23,22 +23,34 @@ namespace Code.Cameras
             if (_target == null || _cameraProvider == null)
                 return;
 
-            SetPositionCamera(_target.position, _offsetPosition, _lerpSpeed);
-            SetRotationCamera(_offsetRotation);
+            UpdatePosition();
+            UpdateRotation();
         }
 
-        private void SetPositionCamera(Vector3 target, Vector3 offset, float speed)
+        private void UpdatePosition()
         {
-            Vector3 targetPos = target + offset;
-            _cameraProvider.MainCamera.transform.position = Vector3.Lerp(
-                _cameraProvider.MainCamera.transform.position,
-                targetPos,
-                Time.deltaTime * speed);
+            Transform cam = _cameraProvider.MainCamera.transform;
+            
+            Vector3 desiredPos = _target.TransformPoint(_offsetLocal);
+
+            cam.position = Vector3.Lerp(
+                cam.position,
+                desiredPos,
+                Time.deltaTime * _lerpSpeed
+            );
         }
-        
-        private void SetRotationCamera(Vector3 offset)
+
+        private void UpdateRotation()
         {
-            _cameraProvider.MainCamera.transform.rotation = Quaternion.Euler(offset);
+            Transform cam = _cameraProvider.MainCamera.transform;
+            
+            Quaternion targetRot = Quaternion.Euler(_fixedEuler.x, _target.eulerAngles.y, _fixedEuler.z);
+
+            cam.rotation = Quaternion.Slerp(
+                cam.rotation,
+                targetRot,
+                Time.deltaTime * _lerpSpeed
+            );
         }
     }
 }
