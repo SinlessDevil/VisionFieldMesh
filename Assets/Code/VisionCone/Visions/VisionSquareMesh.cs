@@ -9,6 +9,7 @@ namespace Code.VisionCone.Visions
         [BoxGroup("Vision Square Mesh Settings")] [SerializeField] private float _height = 2f;
         [BoxGroup("Vision Square Mesh Settings")] [SerializeField] private int _segments = 64;
         [BoxGroup("Vision Square Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
+        [BoxGroup("Vision Square Mesh Settings")] [SerializeField] private bool _isShowDebug = true;
 
         private float _lastWidth;
         private float _lastHeight;
@@ -106,6 +107,9 @@ namespace Code.VisionCone.Visions
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
+            if(!_isShowDebug)
+                return;
+            
             if (!enabled || _segments < 2 || HasInitMesh())
                 return;
             
