@@ -225,6 +225,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: a4585a9f0750b8b4a80739050af7ecbc, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: a4585a9f0750b8b4a80739050af7ecbc, type: 3}
       propertyPath: ShapeModule.radius.value
       value: 0.55
       objectReference: {fileID: 0}
@@ -267,6 +271,10 @@ PrefabInstance:
     - target: {fileID: 19800000, guid: a4585a9f0750b8b4a80739050af7ecbc, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
       value: 52.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: a4585a9f0750b8b4a80739050af7ecbc, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: a4585a9f0750b8b4a80739050af7ecbc, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
