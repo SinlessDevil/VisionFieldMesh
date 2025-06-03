@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2476557295014629643}
   - component: {fileID: 6882220862795762838}
+  - component: {fileID: 3572842673578879623}
   - component: {fileID: 1246213605465607168}
   - component: {fileID: 3439463889206270642}
   m_Layer: 0
@@ -51,12 +52,35 @@ MonoBehaviour:
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 55
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 55
   _coneMaterial: {fileID: 2100000, guid: 17eb323d7fdc02b4aba662823b34aed5, type: 2}
   _sortOrder: 1
   _precision: 300
+  _sideLength: 12
+  _angleDegrees: 120
+  _segments: 64
+  _raycastOffset: 0.5
+  _isShowDebug: 0
+--- !u!114 &3572842673578879623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3863013926719714531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d13dbbf14ad4d34a8ed8a699eaea267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 55
+  _body: {fileID: 2476557295014629643}
+  _isShowDebug: 1
+  _precision: 64
   _sideLength: 12
   _angleDegrees: 120
   _segments: 64
