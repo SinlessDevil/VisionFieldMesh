@@ -1,39 +1,16 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Code.VisionCone.Detectors
 {
     public class TargetCircleDetector : BaseTargetDetector
     {
-        [Header("Detection Settings")] 
-        [SerializeField] private float _range = 6f;
-        [SerializeField] private float _viewAngle = 360f;
-        [SerializeField] private float _heightAbove = 1f;
-        [SerializeField] private float _heightBelow = 1f;
-        [SerializeField] private LayerMask _targetMask;
-        [SerializeField] private LayerMask _obstacleMask;
-        [SerializeField] private Transform _body;
-        [Space(10)] [SerializeField] private bool _isShowDebug = true;
-        [SerializeField] private int _precision = 64;
+        [BoxGroup("Target Circle Detector Settings")] [SerializeField] private float _range = 6f;
+        [BoxGroup("Target Circle Detector Settings")] [SerializeField] private float _viewAngle = 360f;
+        [BoxGroup("Target Circle Detector Settings")] [SerializeField] private float _heightAbove = 1f;
+        [BoxGroup("Target Circle Detector Settings")] [SerializeField] private float _heightBelow = 1f;
 
-        private Enemy _lastTarget;
-
-        private void Update()
-        {
-            Enemy target = FindVisibleTarget();
-
-            if (target != _lastTarget)
-            {
-                if (_lastTarget != null)
-                    OnTargetLost?.Invoke(_lastTarget);
-
-                if (target != null)
-                    OnTargetDetected?.Invoke(target);
-
-                _lastTarget = target;
-            }
-        }
-
-        private Enemy FindVisibleTarget()
+        protected override Enemy FindVisibleTarget()
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _range, _targetMask);
             foreach (var col in colliders)
