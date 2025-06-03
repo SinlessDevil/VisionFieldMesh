@@ -10,6 +10,7 @@ namespace Code.VisionCone.Visions
         [BoxGroup("Vision Offset Triangle Mesh Settings")] [SerializeField] private int _segments = 64;
         [BoxGroup("Vision Offset Triangle Mesh Settings")] [SerializeField] private Vector3 _centerOffset = new(0f, 0f, -2f);
         [BoxGroup("Vision Offset Triangle Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
+        [BoxGroup("Vision Offset Triangle Mesh Settings")] [SerializeField] private bool _isShowDebug = true;
 
         private float _lastWidth;
         private float _lastHeight;
@@ -91,9 +92,12 @@ namespace Code.VisionCone.Visions
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-            if (!enabled || _segments < 2 || HasInitMesh())
+            if(!_isShowDebug)
                 return;
             
+            if (!enabled || _segments < 2 || HasInitMesh())
+                return;
+
             Vector3 origin = transform.position + transform.rotation * _centerOffset;
 
             for (int i = 0; i <= _segments; i++)
@@ -106,9 +110,12 @@ namespace Code.VisionCone.Visions
 
                 if (Physics.Raycast(origin, dir, out RaycastHit hit, maxDist, _obstacleMask))
                 {
+                    float adjustedDist = Mathf.Max(0f, hit.distance - _raycastOffset);
+                    Vector3 adjustedPoint = origin + dir * adjustedDist;
+
                     Gizmos.color = Color.red;
-                    Gizmos.DrawLine(origin, hit.point);
-                    Gizmos.DrawSphere(hit.point, 0.025f);
+                    Gizmos.DrawLine(origin, adjustedPoint);
+                    Gizmos.DrawSphere(adjustedPoint, 0.025f);
                 }
                 else
                 {
@@ -118,5 +125,6 @@ namespace Code.VisionCone.Visions
             }
         }
 #endif
+
     }
 }

@@ -5,29 +5,14 @@ namespace Code.VisionCone.Visions
 {
     public class VisionHalfEllipseMesh : BaseVisionMesh
     {
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
-        private float _width = 4f;
-
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
-        private float _height = 4f;
-
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
-        private int _segments = 64;
-
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
-        private Vector3 _centerOffset = new(0f, 0f, -2f);
-
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
-        private float _preLength = 1.5f;
-
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField]
-        private float _length = 2f;
-
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField, Min(0f)]
-        private float _raycastOffset = 0.5f;
-
-        [BoxGroup("Vision Half Ellipse Mesh Settings")] [Space(10)] [SerializeField]
-        private bool _isShowDebug = true;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _width = 4f;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _height = 4f;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private int _segments = 64;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private Vector3 _centerOffset = new(0f, 0f, -2f);
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _preLength = 1.5f;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField] private float _length = 2f;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
+        [BoxGroup("Vision Half Ellipse Mesh Settings")] [Space(10)] [SerializeField] private bool _isShowDebug = true;
 
         private float _lastWidth;
         private float _lastHeight;
