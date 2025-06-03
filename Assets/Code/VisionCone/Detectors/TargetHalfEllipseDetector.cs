@@ -10,7 +10,8 @@ namespace Code.VisionCone.Detectors
         [BoxGroup("Half Ellipse Detector Settings")] [SerializeField] private Vector3 _centerOffset = new(0f, 0f, -2f);
         [BoxGroup("Half Ellipse Detector Settings")] [SerializeField] private float _preLength = 1.5f;
         [BoxGroup("Half Ellipse Detector Settings")] [SerializeField] private float _length = 2f;
-        
+        [BoxGroup("Half Ellipse Detector Settings")] [SerializeField, Min(0f)] private float _raycastOffset = 0.5f;
+
         protected override Enemy FindVisibleTarget()
         {
             Vector3 origin = _body.position + _body.rotation * _centerOffset;
@@ -30,16 +31,19 @@ namespace Code.VisionCone.Detectors
 
                 if (Physics.Raycast(origin, dir, out RaycastHit hit, distance, _targetMask))
                 {
+                    float adjustedDistance = Mathf.Max(0f, hit.distance - _raycastOffset);
+                    Vector3 adjustedPoint = origin + dir * adjustedDistance;
+
+                    if (Physics.Raycast(origin, dir, out RaycastHit blockHit, adjustedDistance, _obstacleMask))
+                        continue;
+
                     if (hit.collider.TryGetComponent(out Enemy enemy))
                     {
-                        if (distance < closestDistance)
+                        float actualDistance = Vector3.Distance(origin, adjustedPoint);
+                        if (actualDistance < closestDistance)
                         {
-                            if (!Physics.Raycast(origin, dir, out RaycastHit blockHit, distance, _obstacleMask) ||
-                                blockHit.transform == enemy.transform || blockHit.transform.IsChildOf(enemy.transform))
-                            {
-                                closestEnemy = enemy;
-                                closestDistance = distance;
-                            }
+                            closestEnemy = enemy;
+                            closestDistance = actualDistance;
                         }
                     }
                 }
@@ -55,11 +59,10 @@ namespace Code.VisionCone.Detectors
                 return;
 
             Vector3 origin = _body.position + _body.rotation * _centerOffset;
-
-            Gizmos.color = Color.yellow;
             int segments = Mathf.Max(8, _precision);
             Vector3 prevPoint = origin;
 
+            Gizmos.color = Color.yellow;
             for (int i = 0; i <= segments; i++)
             {
                 float t = i / (float)segments;
@@ -85,13 +88,17 @@ namespace Code.VisionCone.Detectors
 
                 if (Physics.Raycast(origin, dir, out RaycastHit hit, distance, _obstacleMask | _targetMask))
                 {
+                    float adjustedDistance = Mathf.Max(0f, hit.distance - _raycastOffset);
+                    Vector3 adjustedPoint = origin + dir * adjustedDistance;
+
                     if (hit.collider.TryGetComponent(out Enemy _))
                         color = Color.yellow;
                     else
                         color = Color.red;
 
                     Gizmos.color = color;
-                    Gizmos.DrawLine(origin, hit.point);
+                    Gizmos.DrawLine(origin, adjustedPoint);
+                    Gizmos.DrawSphere(adjustedPoint, 0.025f);
                 }
                 else
                 {

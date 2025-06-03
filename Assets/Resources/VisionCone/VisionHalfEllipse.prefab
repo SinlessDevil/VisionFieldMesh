@@ -55,7 +55,7 @@ MonoBehaviour:
   _coneMaterial: {fileID: 2100000, guid: 17eb323d7fdc02b4aba662823b34aed5, type: 2}
   _sortOrder: 1
   _precision: 300
-  _width: 10
+  _width: 12
   _height: 5
   _segments: 64
   _centerOffset: {x: 0, y: 0, z: 0}
@@ -84,7 +84,7 @@ MonoBehaviour:
   _body: {fileID: 6406893710322832938}
   _isShowDebug: 1
   _precision: 256
-  _width: 10
+  _width: 12
   _height: 5
   _centerOffset: {x: 0, y: 0, z: 0}
   _preLength: 10
