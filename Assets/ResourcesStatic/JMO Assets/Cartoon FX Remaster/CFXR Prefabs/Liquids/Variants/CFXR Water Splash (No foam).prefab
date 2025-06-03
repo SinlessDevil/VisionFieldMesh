@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &948259216117780725
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5531231052371847854, guid: 60c88e966a0f8324da766221921ee65f,
+        type: 3}
+      propertyPath: m_Name
+      value: CFXR Water Splash (No foam)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531231052371847849, guid: 60c88e966a0f8324da766221921ee65f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531231052371847849, guid: 60c88e966a0f8324da766221921ee65f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531231052371847849, guid: 60c88e966a0f8324da766221921ee65f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531231052371847849, guid: 60c88e966a0f8324da766221921ee65f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447270218099169700, guid: 60c88e966a0f8324da766221921ee65f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 60c88e966a0f8324da766221921ee65f, type: 3}

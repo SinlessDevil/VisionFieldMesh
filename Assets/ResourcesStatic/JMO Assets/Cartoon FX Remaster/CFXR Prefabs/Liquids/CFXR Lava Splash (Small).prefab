@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7652346452548650344
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2443933438703738649, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: m_Name
+      value: CFXR Lava Splash (Small)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443933438703738654, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443933438703738654, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443933438703738654, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443933438703738654, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443933438703738655, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443933438703738655, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443933438703738655, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6960009532998638652, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6960009532998638652, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497823985469884026, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497823985469884026, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497823985469884026, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: CustomDataModule.vector1_0.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519878946363329763, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519878946363329763, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519878946363329763, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: VelocityModule.y.minScalar
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519878946363329763, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: VelocityModule.y.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 332876964098007524, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 332876964098007524, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: VelocityModule.y.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 332876964098007524, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: VelocityModule.y.minScalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 332876964098007524, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2027773489800777165, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2027773489800777165, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2027773489800777165, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5538876246519770131, guid: 6bbb97cd4580a904e866b43b1976e084,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6bbb97cd4580a904e866b43b1976e084, type: 3}
