@@ -5,6 +5,17 @@ It supports various vision shapes and is fully configurable through the Inspecto
 
 Perfect for enemies, turrets, NPCs, guards, and any AI perception systems.
 
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=nCC7kpRZFMk" target="_blank">
+    <img src="https://img.youtube.com/vi/nCC7kpRZFMk/0.jpg" alt="Watch the demo" />
+  </a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Made%20with-Unity-000000?style=for-the-badge&logo=unity&logoColor=white" />
+  &nbsp;
+  <strong><a href="https://www.youtube.com/watch?v=nCC7kpRZFMk">Watch the Unity Demo Video</a></strong>
+</p>
 
 ## 📽️ Demo Preview
 
@@ -75,3 +86,5 @@ _detector.OnTargetLost += enemy => Debug.Log($"👀 Lost: {enemy.name}");
 Unity 2021.3+
 URP or Built-in RP
 DOTween (optional, for demo animations)
+
+https://www.youtube.com/watch?v=nCC7kpRZFMk&t=24s
