@@ -1,7 +1,5 @@
 # 🧠 Vision Field System for Unity
 
-## 🔍 Overview
-
 **VisionFieldSystem** — is a modular and flexible field of view (FOV) system for Unity that combines visual cone rendering with target detection, taking obstacles into account.
 It supports various vision shapes and is fully configurable through the Inspector.
 
@@ -46,8 +44,6 @@ https://github.com/user-attachments/assets/8ce44c5d-a9ee-48d7-9dfa-58d729b61d30
 5. Subscribe to target events:
 
 ```csharp
-_detector.OnTargetDetected += enemy => Debug.Log($"🎯 Seen: {enemy.name}");
-_detector.OnTargetLost += enemy => Debug.Log($"👀 Lost: {enemy.name}");
 🗂️ Project Structure
 bash
 Копировать
@@ -68,6 +64,11 @@ Assets/
         ├── Factory/
         ├── Provider/
         └── Visions/
+```
+
+```csharp
+_detector.OnTargetDetected += enemy => Debug.Log($"🎯 Seen: {enemy.name}");
+_detector.OnTargetLost += enemy => Debug.Log($"👀 Lost: {enemy.name}");
 ```
 
 ✅ Requirements
