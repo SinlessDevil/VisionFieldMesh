@@ -57,8 +57,6 @@ https://github.com/user-attachments/assets/8ce44c5d-a9ee-48d7-9dfa-58d729b61d30
 ```csharp
 🗂️ Project Structure
 bash
-Копировать
-Редактировать
 Assets/
 └── Code/
     ├── Cameras/
