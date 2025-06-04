@@ -12,9 +12,9 @@ Perfect for enemies, turrets, NPCs, guards, and any AI perception systems.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Made%20with-Unity-000000?style=for-the-badge&logo=unity&logoColor=white" />
-  &nbsp;
-  <strong><a href="https://www.youtube.com/watch?v=nCC7kpRZFMk">Watch the Unity Demo Video</a></strong>
+  <a href="https://www.youtube.com/watch?v=nCC7kpRZFMk" target="_blank">
+    <img src="https://img.shields.io/badge/Watch%20on-YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch on YouTube" />
+  </a>
 </p>
 
 ## 📽️ Demo Preview
