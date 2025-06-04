@@ -84,5 +84,3 @@ _detector.OnTargetLost += enemy => Debug.Log($"👀 Lost: {enemy.name}");
 Unity 2021.3+
 URP or Built-in RP
 DOTween (optional, for demo animations)
-
-https://www.youtube.com/watch?v=nCC7kpRZFMk&t=24s
