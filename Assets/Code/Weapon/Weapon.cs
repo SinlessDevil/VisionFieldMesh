@@ -8,8 +8,7 @@ namespace Code.Weapon
         [SerializeField] private ParticleSystem _shootEffect;
         [SerializeField] private GameObject _pivot;
         [SerializeField] private GameObject _model;
-
-        [SerializeField] private float _amplitude = 0.3f; // вверх/вниз
+        [SerializeField] private float _amplitude = 0.3f;
         [SerializeField] private float _duration = 0.5f;
         [SerializeField] private Ease _ease = Ease.InOutSine;
 
@@ -22,7 +21,6 @@ namespace Code.Weapon
         }
 
         public GameObject Pivot => _pivot;
-        public GameObject Model => _model;
 
         public void PlayShootEffect()
         {

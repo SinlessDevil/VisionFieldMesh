@@ -70,9 +70,7 @@ namespace Code.Weapon
         private async UniTask ReadyFollowToTargetState(CancellationToken token)
         {
             _weapon.Stop();
-            
             Quaternion targetRot = Quaternion.Euler(WeaponAimRotation);
-            
             await RotateTo(_weapon.Pivot.transform, targetRot, 0.15f, token);
             await FollowToTarget(token);
         }

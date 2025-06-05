@@ -14,6 +14,7 @@ namespace Code
         public void SetRevive()
         {
             _particleSystem.Stop();
+            
             _collider.enabled = true;
             _meshRenderer.enabled = true;
         }
@@ -21,6 +22,7 @@ namespace Code
         public void SetDead()
         {
             _particleSystem.Play();
+            
             _collider.enabled = false;
             _meshRenderer.enabled = false;
         }
