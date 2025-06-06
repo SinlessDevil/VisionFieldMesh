@@ -80,7 +80,7 @@ _detector.OnTargetDetected += enemy => Debug.Log($"🎯 Seen: {enemy.name}");
 _detector.OnTargetLost += enemy => Debug.Log($"👀 Lost: {enemy.name}");
 ```
 
-✅ Requirements
-Unity 2021.3+
-URP or Built-in RP
-DOTween (optional, for demo animations)
+## ✅ Requirements
+- Unity 2021.3+
+- URP or Built-in RP
+- DOTween (optional, for demo animations)
