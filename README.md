@@ -28,7 +28,7 @@ Perfect for enemies, turrets, NPCs, guards, and any AI perception systems.
 | **Square**       | `VisionSquareMesh` + `TargetSquareDetector`           | ![](https://github.com/user-attachments/assets/209ff446-9c2f-40d1-bcf4-e7555e82b437) |
 | **Rhombus**      | `VisionRhombusMesh` + `TargetRhombusDetector`         | ![](https://github.com/user-attachments/assets/7a5720b7-c31b-47d9-b20e-e50b0fe9806c) |
 
-## 📽️ Videos
+## 📽️ Demo Videos
 
 https://github.com/user-attachments/assets/c0864105-69f8-498b-9de5-39c403db2e54
 
