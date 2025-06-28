@@ -2,7 +2,6 @@
 
 **VisionFieldSystem** — is a modular and flexible field of view (FOV) system for Unity that combines visual cone rendering with target detection, taking obstacles into account.
 It supports various vision shapes and is fully configurable through the Inspector.
-
 Perfect for enemies, turrets, NPCs, guards, and any AI perception systems.
 
 <p align="center">
